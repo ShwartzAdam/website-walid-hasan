@@ -1,0 +1,70 @@
+# Walid Hasan — corporate website
+
+Website for **Walid Hasan Infrastructure, Development & Earthworks**, available in Hebrew, Arabic and English.
+
+Built with Next.js 16 (App Router), TypeScript, Tailwind CSS 4, Motion and Leaflet. Content lives in typed data files and is ready to move to a headless CMS later.
+
+## Getting started
+
+```bash
+cp .env.example .env.local
+npm install
+npm run dev          # http://localhost:3000 → redirects to /he (or the browser's language)
+```
+
+| Script | Purpose |
+| --- | --- |
+| `npm run dev` | Development server |
+| `npm run build` / `npm start` | Production build and server |
+| `npm run lint` / `npm run typecheck` | ESLint and TypeScript checks |
+| `npm run check:content` | Launch gate: unverified claims, pending photos, rights, translations |
+
+## Structure
+
+```
+src/
+  app/[locale]/…        Pages: home, about, capabilities(/[slug]), projects(/[slug]), contact
+  app/api/contact       Project inquiry endpoint (multipart, file upload)
+  app/sitemap.ts        hreflang-aware sitemap (strict mode only)
+  app/robots.ts
+  proxy.ts              Locale detection: cookie → Accept-Language → Hebrew
+  content/              All content as typed data (see docs/CONTENT.md)
+  i18n/                 Locale config and UI dictionaries (he / ar / en)
+  lib/                  Content repository, SEO, structured data, analytics
+  components/           UI (home sections, project cards/explorer, contact form…)
+```
+
+## Implemented from the PRD
+
+- **Languages (§4):** `/he`, `/ar` and `/en` URLs, each with its own translated content. Hebrew and Arabic are RTL and English is LTR, set with `lang`/`dir` on `<html>`. Layouts use logical CSS properties, arrows point the right way in each direction, and each language has its own typefaces (Heebo, IBM Plex Sans Arabic + Noto Kufi Arabic, Archivo).
+- **Homepage (§6):** every section is built: hero (with adaptive video support), intro, interactive capabilities (hover on desktop, swipe on mobile), alternating editorial projects, animated numbers, project map, equipment gallery, company story, credentials, clients (shown only with permission) and a full-screen closing CTA.
+- **Projects (§7–8):** listing filterable by category, location and year, with filters kept in the URL. The detail page has hero, facts, overview/stats, challenge, execution, results, scope, gallery, related projects and a CTA.
+- **Capabilities (§10):** an index page plus one SEO landing page per capability.
+- **About (§9)** and **Contact (§11):** professional inquiry form with project type, scope and file upload (validated on client and server, with a honeypot), plus WhatsApp, phone and email links and an office map.
+- **Mobile (§12):** sticky WhatsApp / Call / Start a Project bar, swipe galleries, and a full-screen menu.
+- **Motion (§13):** text and image reveals, hero parallax, number counters and filter transitions. Everything respects `prefers-reduced-motion`.
+- **SEO (§17):** per-page metadata, canonical URLs, hreflang (+ x-default), Open Graph and Twitter cards, generated OG image, sitemap, robots, and JSON-LD (`GeneralContractor`, `Service`, `BreadcrumbList`, project `CreativeWork`).
+- **Performance (§18):** pages are statically generated. Images use `next/image` (AVIF/WebP), Leaflet loads only when the map scrolls into view, and videos load adaptively.
+- **Accessibility (§20):** semantic landmarks, skip link, visible focus states, labelled form fields with announced errors, and a list alternative to the map.
+- **Analytics (§21):** GA4 through `NEXT_PUBLIC_GA_ID`. It tracks form submissions and errors, WhatsApp, phone and email clicks, project views, filter usage, language selection and CTA clicks.
+
+## Environment
+
+See `.env.example`. The key settings:
+
+- `NEXT_PUBLIC_SITE_URL`: the canonical origin.
+- `CONTENT_MODE`: `preview` (default, `noindex`) or `strict` (launch).
+- `RESEND_API_KEY` + `CONTACT_TO_EMAIL`, or `CONTACT_WEBHOOK_URL`: where inquiries are sent. Without either one, production returns 503 instead of silently dropping leads.
+- `NEXT_PUBLIC_MAP_TILE_URL` / `NEXT_PUBLIC_MAP_ATTRIBUTION`: optional. Swap the default CARTO basemap for Mapbox or another provider.
+
+## Before launch (PRD §29)
+
+- [ ] Replace sample projects with researched, company-approved projects (`npm run check:content` passes).
+- [ ] Real contact details (phone, WhatsApp, email, address, coordinates) confirmed.
+- [ ] Credentials verified against the Registrar of Contractors.
+- [ ] Photography delivered with confirmed usage rights.
+- [ ] Hebrew and Arabic copy reviewed by native speakers, and RTL tested on real devices.
+- [ ] Contact delivery configured and tested end to end, including attachments.
+- [ ] GA4 and Search Console configured. Cookie consent reviewed against Israeli privacy law (Amendment 13).
+- [ ] Deploy with `CONTENT_MODE=strict` and the production `NEXT_PUBLIC_SITE_URL`.
+- [ ] Choose the CMS based on the company's editing workflow (PRD §19, §23).
