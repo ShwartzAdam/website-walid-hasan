@@ -53,82 +53,86 @@ export function SiteHeader({ locale }: { locale: Locale }) {
   const isActive = (key: string) => rest === `/${key}` || rest.startsWith(`/${key}/`);
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 text-paper transition-colors duration-500 ${
-        scrolled || open ? "bg-ink/92 backdrop-blur-md" : "bg-gradient-to-b from-ink/60 to-transparent"
-      }`}
-    >
-      <div className="container-x flex h-16 items-center justify-between gap-6 md:h-20">
-        <Link href={href(locale)} className="group flex items-center gap-3" onClick={() => setOpen(false)}>
-          <LogoMark className="h-8 w-8 shrink-0 md:h-9 md:w-9" />
-          <span className="flex flex-col leading-none">
-            <span className="font-display text-lg font-bold tracking-[0.12em] rtl:tracking-normal md:text-xl">
-              {dict.common.brand}
+    <>
+      <header
+        className={`fixed inset-x-0 top-0 z-50 text-paper transition-colors duration-500 ${
+          scrolled || open ? "bg-ink/92 backdrop-blur-md" : "bg-gradient-to-b from-ink/60 to-transparent"
+        }`}
+      >
+        <div className="container-x flex h-16 items-center justify-between gap-6 md:h-20">
+          <Link href={href(locale)} className="group flex items-center gap-3" onClick={() => setOpen(false)}>
+            <LogoMark className="h-8 w-8 shrink-0 md:h-9 md:w-9" />
+            <span className="flex flex-col leading-none">
+              <span className="font-display text-lg font-bold tracking-[0.12em] rtl:tracking-normal md:text-xl">
+                {dict.common.brand}
+              </span>
+              <span className="mt-1 text-[10px] tracking-[0.2em] text-sand/70 uppercase rtl:tracking-normal">
+                {dict.common.tagline.join(" · ")}
+              </span>
             </span>
-            <span className="mt-1 text-[10px] tracking-[0.2em] text-sand/70 uppercase rtl:tracking-normal">
-              {dict.common.tagline.join(" · ")}
-            </span>
-          </span>
-        </Link>
-
-        <nav aria-label={dict.a11y.mainNav} className="hidden items-center gap-8 lg:flex">
-          {NAV.map((key) => (
-            <Link
-              key={key}
-              href={href(locale, `/${key}`)}
-              aria-current={isActive(key) ? "page" : undefined}
-              className={`relative py-2 text-sm font-medium transition-colors hover:text-signal ${
-                isActive(key) ? "text-signal" : ""
-              }`}
-            >
-              {dict.nav[key]}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-4">
-          <ul className="hidden items-center gap-1 text-xs sm:flex" aria-label={dict.a11y.language}>
-            {locales.map((l) => (
-              <li key={l}>
-                <Link
-                  href={href(l, rest)}
-                  hrefLang={l}
-                  lang={l}
-                  aria-current={l === locale ? "true" : undefined}
-                  title={localeNames[l]}
-                  onClick={() => rememberLocale(l)}
-                  className={`block px-2 py-1.5 transition-colors ${
-                    l === locale ? "text-signal" : "text-sand/70 hover:text-paper"
-                  }`}
-                >
-                  <span aria-hidden>{localeShortNames[l]}</span>
-                  <span className="sr-only">{localeNames[l]}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <Link
-            href={href(locale, "/contact")}
-            data-track="cta_click"
-            data-track-label="header_start_project"
-            className="btn btn-primary hidden min-h-11 px-5 text-sm md:inline-flex"
-          >
-            {dict.nav.startProject}
           </Link>
-          <button
-            ref={menuButton}
-            type="button"
-            className="-me-2 p-2 lg:hidden"
-            aria-expanded={open}
-            aria-controls="mobile-menu"
-            aria-label={open ? dict.a11y.closeMenu : dict.a11y.openMenu}
-            onClick={() => setOpen((v) => !v)}
-          >
-            {open ? <CloseIcon /> : <MenuIcon />}
-          </button>
-        </div>
-      </div>
 
+          <nav aria-label={dict.a11y.mainNav} className="hidden items-center gap-8 lg:flex">
+            {NAV.map((key) => (
+              <Link
+                key={key}
+                href={href(locale, `/${key}`)}
+                aria-current={isActive(key) ? "page" : undefined}
+                className={`relative py-2 text-sm font-medium transition-colors hover:text-signal ${
+                  isActive(key) ? "text-signal" : ""
+                }`}
+              >
+                {dict.nav[key]}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-4">
+            <ul className="hidden items-center gap-1 text-xs sm:flex" aria-label={dict.a11y.language}>
+              {locales.map((l) => (
+                <li key={l}>
+                  <Link
+                    href={href(l, rest)}
+                    hrefLang={l}
+                    lang={l}
+                    aria-current={l === locale ? "true" : undefined}
+                    title={localeNames[l]}
+                    onClick={() => rememberLocale(l)}
+                    className={`block px-2 py-1.5 transition-colors ${
+                      l === locale ? "text-signal" : "text-sand/70 hover:text-paper"
+                    }`}
+                  >
+                    <span aria-hidden>{localeShortNames[l]}</span>
+                    <span className="sr-only">{localeNames[l]}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <Link
+              href={href(locale, "/contact")}
+              data-track="cta_click"
+              data-track-label="header_start_project"
+              className="btn btn-primary hidden min-h-11 px-5 text-sm md:inline-flex"
+            >
+              {dict.nav.startProject}
+            </Link>
+            <button
+              ref={menuButton}
+              type="button"
+              className="-me-2 p-2 lg:hidden"
+              aria-expanded={open}
+              aria-controls="mobile-menu"
+              aria-label={open ? dict.a11y.closeMenu : dict.a11y.openMenu}
+              onClick={() => setOpen((v) => !v)}
+            >
+              {open ? <CloseIcon /> : <MenuIcon />}
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Rendered outside <header>: the header's backdrop-filter would otherwise become the
+          containing block for this fixed panel and collapse it to the header's height. */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -137,7 +141,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-x-0 top-16 bottom-0 overflow-y-auto bg-ink md:top-20 lg:hidden"
+            className="fixed inset-x-0 top-16 bottom-0 z-[45] overflow-y-auto bg-ink text-paper md:top-20 lg:hidden"
           >
             <nav aria-label={dict.a11y.mainNav} className="container-x flex h-full flex-col justify-between py-10">
               <ul className="space-y-2">
@@ -181,6 +185,6 @@ export function SiteHeader({ locale }: { locale: Locale }) {
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 }

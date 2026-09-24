@@ -9,7 +9,7 @@ Built with Next.js 16 (App Router), TypeScript, Tailwind CSS 4, Motion and Leafl
 ```bash
 cp .env.example .env.local
 npm install
-npm run dev          # http://localhost:3000 → redirects to /he (or the browser's language)
+npm run dev          # http://localhost:3000 → redirects to /he (or the language picked earlier)
 ```
 
 | Script | Purpose |
@@ -29,7 +29,7 @@ src/
   app/api/contact       Project inquiry endpoint (multipart, file upload)
   app/sitemap.ts        hreflang-aware sitemap (strict mode only)
   app/robots.ts
-  proxy.ts              Locale detection: cookie → Accept-Language → Hebrew
+  proxy.ts              "/" → Hebrew, or the language the visitor picked (cookie)
   content/              All content as typed data (see docs/CONTENT.md)
   i18n/                 Locale config and UI dictionaries (he / ar / en)
   lib/                  Content repository, SEO, structured data, analytics
@@ -63,7 +63,7 @@ from the Actions tab.
 Pages only serves static files, so `npm run build:pages` makes these changes:
 
 - `proxy.ts` and `/api/contact` are left out of the static build (and restored afterwards).
-- `/` becomes a small page that sends visitors to `/he/`, `/ar/` or `/en/` based on their saved choice or browser language.
+- `/` becomes a small page that sends visitors to `/he/`, or to the language they picked earlier on the site.
 - The contact form posts to `NEXT_PUBLIC_CONTACT_ENDPOINT` if you set one as a repository variable, for example a Formspree or Basin form URL. If not, it opens the visitor's email app with the details filled in; files can't be attached that way.
 - Images are served without Next's optimisation server.
 

@@ -3,24 +3,14 @@ import { defaultLocale, isLocale, type Locale } from "@/i18n/config";
 
 const LOCALE_COOKIE = "NEXT_LOCALE";
 
+/**
+ * Hebrew is the primary language (PRD §4), so "/" always opens the Hebrew site —
+ * unless the visitor has already picked a language with the switcher (cookie).
+ * The browser's language is deliberately not used: most Israeli devices are set to English.
+ */
 function preferredLocale(request: NextRequest): Locale {
   const cookie = request.cookies.get(LOCALE_COOKIE)?.value;
-  if (isLocale(cookie)) return cookie;
-
-  const header = request.headers.get("accept-language") ?? "";
-  const ranked = header
-    .split(",")
-    .map((part) => {
-      const [tag, q] = part.trim().split(";q=");
-      return { lang: tag.toLowerCase().split("-")[0], q: q ? Number(q) : 1 };
-    })
-    .sort((a, b) => b.q - a.q);
-  for (const { lang } of ranked) {
-    // "iw" is the legacy code for Hebrew still sent by some clients.
-    const normalized = lang === "iw" ? "he" : lang;
-    if (isLocale(normalized)) return normalized;
-  }
-  return defaultLocale;
+  return isLocale(cookie) ? cookie : defaultLocale;
 }
 
 export function proxy(request: NextRequest) {

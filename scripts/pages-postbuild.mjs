@@ -1,7 +1,7 @@
 /**
  * Finishes the static export for GitHub Pages:
- *  - out/index.html: replaces proxy.ts — sends "/" to /he, /ar or /en using the
- *    saved choice (NEXT_LOCALE cookie) or the browser language.
+ *  - out/index.html: replaces proxy.ts — sends "/" to /he (the primary
+ *    language), or to the language the visitor picked earlier (NEXT_LOCALE cookie).
  *  - out/404.html: sends unknown paths to the right language's home page.
  *  - out/.nojekyll: stops Jekyll from dropping the "_next" asset folder.
  */
@@ -17,15 +17,8 @@ const detect = `
   var base = ${JSON.stringify(base)};
   var locales = ${JSON.stringify(locales)};
   var m = document.cookie.match(/(?:^|; )NEXT_LOCALE=([^;]+)/);
+  // Hebrew by default; only a language the visitor chose on the site overrides it.
   var pick = m && locales.indexOf(m[1]) !== -1 ? m[1] : null;
-  if (!pick) {
-    var langs = navigator.languages || [navigator.language || ""];
-    for (var i = 0; i < langs.length && !pick; i++) {
-      var l = String(langs[i]).toLowerCase().split("-")[0];
-      if (l === "iw") l = "he";
-      if (locales.indexOf(l) !== -1) pick = l;
-    }
-  }
   location.replace(base + "/" + (pick || "he") + "/");
 })();`;
 
