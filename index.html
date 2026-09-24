@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Walid Hasan</title>
+<noscript><meta http-equiv="refresh" content="0; url=/website-walid-hasan/he/"></noscript>
+<script>
+(function () {
+  var base = "/website-walid-hasan";
+  var locales = ["he","ar","en"];
+  var m = document.cookie.match(/(?:^|; )NEXT_LOCALE=([^;]+)/);
+  var pick = m && locales.indexOf(m[1]) !== -1 ? m[1] : null;
+  if (!pick) {
+    var langs = navigator.languages || [navigator.language || ""];
+    for (var i = 0; i < langs.length && !pick; i++) {
+      var l = String(langs[i]).toLowerCase().split("-")[0];
+      if (l === "iw") l = "he";
+      if (locales.indexOf(l) !== -1) pick = l;
+    }
+  }
+  location.replace(base + "/" + (pick || "he") + "/");
+})();</script>
+<style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0c0d0e;color:#ecebe6;font:16px system-ui,sans-serif}a{color:#e3a82b;margin:0 .75rem}</style>
+</head>
+<body>
+<p>
+  <a href="/website-walid-hasan/he/" hreflang="he">עברית</a>
+  <a href="/website-walid-hasan/ar/" hreflang="ar">العربية</a>
+  <a href="/website-walid-hasan/en/" hreflang="en">English</a>
+</p>
+</body>
+</html>
