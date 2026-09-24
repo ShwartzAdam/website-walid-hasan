@@ -17,7 +17,9 @@ npm run dev          # http://localhost:3000 → redirects to /he (or the browse
 | `npm run dev` | Development server |
 | `npm run build` / `npm start` | Production build and server |
 | `npm run lint` / `npm run typecheck` | ESLint and TypeScript checks |
-| `npm run check:content` | Launch gate: unverified claims, pending photos, rights, translations |
+| `npm run check:content` | Launch gate: NEEDS_CONFIRMATION claims, uncleared web assets, translations |
+| `npm run inventory` | Asset inventory → `docs/ASSET-INVENTORY.md` / `.csv` |
+| `npm run generate:illustrations` | Regenerate the GENERATED engineering illustrations |
 
 ## Structure
 
@@ -45,6 +47,7 @@ src/
 - **Motion (§13):** text and image reveals, hero parallax, number counters and filter transitions. Everything respects `prefers-reduced-motion`.
 - **SEO (§17):** per-page metadata, canonical URLs, hreflang (+ x-default), Open Graph and Twitter cards, generated OG image, sitemap, robots, and JSON-LD (`GeneralContractor`, `Service`, `BreadcrumbList`, project `CreativeWork`).
 - **Performance (§18):** pages are statically generated. Images use `next/image` (AVIF/WebP), Leaflet loads only when the map scrolls into view, and videos load adaptively.
+- **Assets (Asset Strategy):** every image slot follows the order Original → Web → Generated → Placeholder. Generated engineering drawings (plans, sections, profiles, equipment elevations) are always labelled as illustrations. The research findings are recorded with their sources in `docs/ASSET-INVENTORY.md`. See `docs/CONTENT.md`.
 - **Accessibility (§20):** semantic landmarks, skip link, visible focus states, labelled form fields with announced errors, and a list alternative to the map.
 - **Analytics (§21):** GA4 through `NEXT_PUBLIC_GA_ID`. It tracks form submissions and errors, WhatsApp, phone and email clicks, project views, filter usage, language selection and CTA clicks.
 
@@ -85,7 +88,8 @@ See `.env.example`. The key settings:
 
 ## Before launch (PRD §29)
 
-- [ ] Replace sample projects with researched, company-approved projects (`npm run check:content` passes).
+- [ ] Company confirms every NEEDS_CONFIRMATION item and adds more projects (`npm run check:content` passes).
+- [ ] Original photos, video and logo replace the generated assets where possible (`docs/ASSET-INVENTORY.md`).
 - [ ] Real contact details (phone, WhatsApp, email, address, coordinates) confirmed.
 - [ ] Credentials verified against the Registrar of Contractors.
 - [ ] Photography delivered with confirmed usage rights.

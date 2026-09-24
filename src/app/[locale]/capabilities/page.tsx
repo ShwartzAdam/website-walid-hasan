@@ -45,7 +45,7 @@ export default async function CapabilitiesPage({ params }: PageProps<"/[locale]/
               </ImageReveal>
               <Reveal className={`md:col-span-5 ${i % 2 ? "md:order-1" : ""}`}>
                 <p className="text-xs text-steel tabular-nums">{String(i + 1).padStart(2, "0")}</p>
-                <h2 className="mt-3 font-display text-headline font-bold uppercase rtl:normal-case">
+                <h2 className="mt-3 font-display text-[clamp(1.9rem,3.2vw,3.5rem)] leading-[1.05] font-bold uppercase [overflow-wrap:anywhere] rtl:normal-case">
                   <Link href={href(locale, `/capabilities/${c.id}`)} className="hover:text-signal-deep">
                     {c.title[locale]}
                   </Link>

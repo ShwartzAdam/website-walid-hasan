@@ -6,13 +6,14 @@ import { EquipmentGallery } from "@/components/home/EquipmentGallery";
 import { Hero } from "@/components/home/Hero";
 import { ProjectMap } from "@/components/home/ProjectMap";
 import { StatCounter } from "@/components/home/StatCounter";
+import { BuildStory } from "@/components/story/BuildStory";
 import { ProjectFeature } from "@/components/projects/ProjectFeature";
 import { ArrowIcon } from "@/components/ui/Icons";
 import { Media } from "@/components/ui/Media";
 import { PendingBadge } from "@/components/ui/PendingBadge";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { story, storyImage } from "@/content/company";
+import { heroMedia, story, storyImage } from "@/content/company";
 import { categories, equipmentCategories } from "@/content/taxonomy";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -24,6 +25,7 @@ import {
   getFeaturedProjects,
   getProjects,
   getStats,
+  getTestimonials,
   isPending,
 } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
@@ -54,7 +56,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
   const credentials = getCredentials();
   const equipment = getEquipment();
   const clients = getClients();
-  const heroProject = featured[0];
+  const testimonials = getTestimonials();
 
   const mapProjects = allProjects
     .filter((p) => p.coordinates)
@@ -69,18 +71,8 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
 
   return (
     <>
-      {/* 6.1 Hero */}
-      <Hero
-        locale={locale}
-        image={
-          heroProject?.hero ?? {
-            alt: { he: "תשתיות", ar: "بنية تحتية", en: "Infrastructure" },
-            brief: "Drone: large-scale earthworks site",
-            rightsConfirmed: false,
-          }
-        }
-        video={heroProject?.heroVideo}
-      />
+      {/* 6.1 Hero — best available hero asset (drone video → photo → generated) */}
+      <Hero locale={locale} image={heroMedia.image} video={heroMedia.video} />
 
       {/* 6.2 Intro */}
       <section id="intro" className="bg-paper py-28 md:py-44">
@@ -98,6 +90,9 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
           </div>
         </div>
       </section>
+
+      {/* Core visual story: GROUND → INFRASTRUCTURE → DEVELOPMENT → COMMUNITY */}
+      <BuildStory locale={locale} />
 
       {/* 6.3 Capabilities */}
       {capabilities.length > 0 && (
@@ -179,7 +174,8 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
               items={equipment.map((e) => ({
                 id: e.id,
                 name: e.name,
-                count: e.count,
+                quantity: e.quantity,
+                model: [e.manufacturer, e.model].filter(Boolean).join(" ") || undefined,
                 image: e.image,
                 pending: isPending(e),
                 categoryLabel: equipmentCategories[e.category][locale],
@@ -217,9 +213,9 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
         <section className="bg-concrete py-24 md:py-32">
           <div className="container-x">
             <SectionHeading eyebrow={dict.home.credentialsEyebrow} title={dict.home.credentialsHeadline} className="mb-14" />
-            <ul className="grid gap-px bg-sand sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="grid gap-x-10 sm:grid-cols-2 lg:grid-cols-3">
               {credentials.map((c, i) => (
-                <li key={c.id} className="bg-concrete p-8">
+                <li key={c.id} className="border-t border-ink/15 py-8">
                   <Reveal delay={i * 0.08}>
                     <p className="text-sm text-steel">{c.label[locale]}</p>
                     <p dir="ltr" className="mt-4 text-start font-display text-6xl font-bold tabular-nums rtl:text-end">
@@ -228,6 +224,27 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
                     {c.detail && <p className="mt-3 text-sm text-steel">{c.detail[locale]}</p>}
                     <PendingBadge verification={c.verification} locale={locale} className="mt-4" />
                   </Reveal>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+
+      {/* Testimonials — only real quotes with permission */}
+      {testimonials.length > 0 && (
+        <section className="bg-ink py-24 text-paper md:py-32">
+          <div className="container-x">
+            <p className="eyebrow mb-12 text-stone">{dict.home.testimonialsEyebrow}</p>
+            <ul className="grid gap-12 md:grid-cols-2">
+              {testimonials.map((t) => (
+                <li key={t.id}>
+                  <figure>
+                    <blockquote className="font-display text-2xl leading-snug font-semibold md:text-3xl">“{t.quote[locale]}”</blockquote>
+                    <figcaption className="mt-6 text-sm text-sand">
+                      <span className="font-semibold text-paper">{t.name}</span> · {t.position[locale]}, {t.company[locale]}
+                    </figcaption>
+                  </figure>
                 </li>
               ))}
             </ul>

@@ -63,6 +63,7 @@ const he: Dictionary = {
     email: "דוא״ל",
     pendingVerification: "ממתין לאימות",
     photoPending: "צילום בהכנה",
+    illustration: "הדמיה גרפית",
     location: "מיקום",
     client: "מזמין",
     year: "שנה",
@@ -77,6 +78,15 @@ const he: Dictionary = {
     introHeadline: "בונים את התשתית שמאחורי קהילות צומחות.",
     introBody:
       "וליד חסן היא חברת תשתיות, פיתוח ועבודות עפר. אנחנו מכשירים את הקרקע, מניחים את הרשתות וסוללים את הכבישים ששכונות חדשות ופרויקטים ציבוריים נשענים עליהם — עם צוותים וציוד מכני כבד של החברה, מהחפירה הראשונה ועד המסירה.",
+    buildEyebrow: "איך זה נבנה",
+    buildHeadline: "מהקרקע ועד הקהילה.",
+    buildStages: [
+      { title: "קרקע", body: "הכול מתחיל בקרקע: מדידה, חפירה, מילוי והידוק." },
+      { title: "תשתיות", body: "מתחת לפני השטח: רשתות מים, ביוב וניקוז." },
+      { title: "פיתוח", body: "כבישים, מדרכות וקירות תומכים מחברים את הכול." },
+      { title: "קהילה", body: "המקום שבו אנשים חיים." },
+    ],
+    testimonialsEyebrow: "מה אומרים עלינו",
     capabilitiesEyebrow: "מה אנחנו בונים",
     capabilitiesHeadline: "תחומי פעילות",
     projectsEyebrow: "עבודות נבחרות",
@@ -175,6 +185,7 @@ const he: Dictionary = {
   },
   footer: {
     rights: "כל הזכויות שמורות.",
+    companyNumberLabel: "ח.פ.",
     licenseLabel: "מספר קבלן",
     explore: "ניווט",
     contact: "יצירת קשר",

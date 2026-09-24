@@ -19,13 +19,17 @@ export const regions: Record<RegionId, Localized> = {
   "tel-aviv": { he: "מחוז תל אביב", ar: "لواء تل أبيب", en: "Tel Aviv District" },
   jerusalem: { he: "מחוז ירושלים", ar: "لواء القدس", en: "Jerusalem District" },
   south: { he: "מחוז דרום", ar: "لواء الجنوب", en: "Southern District" },
+  // Naming to be confirmed with the company for each language.
+  "judea-samaria": { he: "יהודה ושומרון", ar: "يهودا والسامرة", en: "Judea & Samaria" },
 };
 
 export const equipmentCategories: Record<EquipmentCategoryId, Localized> = {
   excavators: { he: "מחפרים", ar: "حفّارات", en: "Excavators" },
   loaders: { he: "שופלים", ar: "جرّافات تحميل", en: "Loaders" },
-  trucks: { he: "משאיות", ar: "شاحنات", en: "Trucks" },
-  compactors: { he: "מכבשים", ar: "مداحل", en: "Compactors" },
+  "dump-trucks": { he: "משאיות רכינה", ar: "شاحنات قلّابة", en: "Dump trucks" },
+  bulldozers: { he: "דחפורים", ar: "جرّافات (بلدوزر)", en: "Bulldozers" },
   graders: { he: "מפלסות", ar: "ممهّدات", en: "Graders" },
-  other: { he: "ציוד נוסף", ar: "معدات أخرى", en: "Other machinery" },
+  compactors: { he: "מהדקים", ar: "مدكّات", en: "Compactors" },
+  rollers: { he: "מכבשים", ar: "مداحل", en: "Rollers" },
+  specialized: { he: "ציוד ייעודי", ar: "معدات متخصصة", en: "Specialized equipment" },
 };

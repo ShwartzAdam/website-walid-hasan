@@ -63,6 +63,7 @@ const ar: Dictionary = {
     email: "البريد الإلكتروني",
     pendingVerification: "بانتظار التحقق",
     photoPending: "الصورة قيد التحضير",
+    illustration: "رسم توضيحي",
     location: "الموقع",
     client: "الجهة المالكة",
     year: "السنة",
@@ -77,6 +78,15 @@ const ar: Dictionary = {
     introHeadline: "نبني البنية التحتية التي تنمو عليها المجتمعات.",
     introBody:
       "وليد حسن شركة مقاولات في مجال البنية التحتية والتطوير والأعمال الترابية. نُجهّز الأرض، ونمدّ الشبكات، ونشقّ الطرق التي تعتمد عليها الأحياء الجديدة والمشاريع العامة — بطواقمنا ومعداتنا الثقيلة الخاصة، من أول حفرية حتى التسليم.",
+    buildEyebrow: "كيف يُبنى",
+    buildHeadline: "من الأرض إلى المجتمع.",
+    buildStages: [
+      { title: "الأرض", body: "كل شيء يبدأ من الأرض: مسح، حفر، ردم ودمك." },
+      { title: "البنية التحتية", body: "تحت السطح: شبكات المياه والصرف الصحي والتصريف." },
+      { title: "التطوير", body: "طرق وأرصفة وجدران استنادية تربط كل شيء." },
+      { title: "المجتمع", body: "المكان الذي يعيش فيه الناس." },
+    ],
+    testimonialsEyebrow: "بكلماتهم",
     capabilitiesEyebrow: "ماذا نبني",
     capabilitiesHeadline: "مجالات العمل",
     projectsEyebrow: "أعمال مختارة",
@@ -175,6 +185,7 @@ const ar: Dictionary = {
   },
   footer: {
     rights: "جميع الحقوق محفوظة.",
+    companyNumberLabel: "رقم الشركة",
     licenseLabel: "رقم المقاول",
     explore: "تصفّح",
     contact: "تواصل",

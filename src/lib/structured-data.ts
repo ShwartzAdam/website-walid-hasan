@@ -8,7 +8,7 @@ import { absoluteUrl, href, siteUrl } from "./site";
 export function organizationSchema(locale: Locale) {
   const dict = getDictionary(locale);
   // Contact details are only emitted once verified, so search engines never index placeholders.
-  const contactVerified = contact.verification.status !== "unverified";
+  const contactVerified = contact.verification.status === "verified";
   const sameAs = Object.values(contact.social).filter(Boolean);
   return {
     "@context": "https://schema.org",

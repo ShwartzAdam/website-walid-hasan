@@ -1,32 +1,80 @@
 import type { Localized } from "@/i18n/config";
 
+// ─── Content verification (Asset Strategy §5, PRD §15) ──────────────────────
 /**
- * PRD §15: "No unsupported claims should be published."
- * Every factual content item carries its evidence. In `CONTENT_MODE=strict`
- * anything still `unverified` is hidden from the site (see lib/content.ts).
+ * VERIFIED            confirmed by the company or an authoritative public source — publishable.
+ * NEEDS_CONFIRMATION  found, but the company must confirm — shown only in preview, with a badge.
+ * DO_NOT_PUBLISH      never shown (kept for reference / internal use).
  */
-export type VerificationStatus = "unverified" | "public-source" | "company-confirmed";
+export type ContentStatus = "verified" | "needs-confirmation" | "do-not-publish";
 
 export interface Verification {
-  status: VerificationStatus;
-  /** URL or description of the public source / who at the company confirmed it. */
+  status: ContentStatus;
+  /** What the confirmation rests on. */
+  basis?: "company" | "public-source" | "prd";
+  /** Human-readable source, e.g. "Ministry of Finance recognised-contractor registry". */
   source?: string;
-  /** ISO date the item was last checked. */
+  url?: string;
+  /** ISO date the item was found / last checked. */
   checkedAt?: string;
   notes?: string;
 }
 
+// ─── Assets (Asset Strategy — priority Original → Web → Generated → Placeholder)
+/**
+ * VERIFIED            original company material, approved for use.
+ * WEB                 found online — source and usage rights must be checked before production.
+ * GENERATED           created by us — never presented as documentation of real work.
+ * NEEDS_CONFIRMATION  material exists but the company must approve it.
+ * MISSING             nothing suitable yet.
+ */
+export type AssetStatus = "verified" | "web" | "generated" | "needs-confirmation" | "missing";
+
+export type IllustrationId =
+  | "topography"
+  | "earthworks"
+  | "road"
+  | "network"
+  | "water"
+  | "sewer"
+  | "drainage"
+  | "retaining"
+  | "neighborhood"
+  | "residential"
+  | "public"
+  | "equipment-excavator"
+  | "equipment-loader"
+  | "equipment-dump-truck"
+  | "equipment-roller"
+  | "equipment-grader"
+  | "equipment-bulldozer"
+  | "equipment-crusher";
+
+export interface AssetSource {
+  /** Where the file / information was found. */
+  url?: string;
+  /** ISO date found. */
+  foundAt?: string;
+  /** What this asset proves (e.g. "company owns a Volvo EC300E"). */
+  proves?: string;
+  permission: "granted" | "not-required" | "requested" | "unknown";
+  credit?: string;
+  confidence?: "high" | "medium" | "low";
+}
+
 export interface MediaImage {
-  /** Path under /public or an absolute URL. Omit while the photo is still pending. */
+  /** Photo / video-poster file (original or permitted web material). */
   src?: string;
   width?: number;
   height?: number;
+  /** Status of `src`. With no `src`, "missing". */
+  status: AssetStatus;
+  source?: AssetSource;
   alt: Localized;
-  /** What the photographer should capture — shown on the placeholder until `src` exists. */
+  /** Shot list: what the real photo should show. */
   brief?: string;
-  credit?: string;
-  /** PRD §29: image usage rights must be confirmed before launch. */
-  rightsConfirmed: boolean;
+  /** GENERATED fallback used when no usable photo exists. Always labelled on the site. */
+  illustration?: IllustrationId;
 }
 
 export interface MediaVideo {
@@ -34,9 +82,11 @@ export interface MediaVideo {
   /** Lower-bitrate rendition served to small screens / Save-Data users. */
   mobileSrc?: string;
   poster: MediaImage;
-  rightsConfirmed: boolean;
+  status: AssetStatus;
+  source?: AssetSource;
 }
 
+// ─── Taxonomy ────────────────────────────────────────────────────────────────
 export type CategoryId =
   | "residential-development"
   | "roads"
@@ -55,10 +105,24 @@ export type CapabilityId =
   | "sewer"
   | "drainage"
   | "development"
-  | "retaining-walls";
+  | "residential-development"
+  | "retaining-walls"
+  | "public-infrastructure"
+  | "pumping-stations";
 
-export type RegionId = "north" | "haifa" | "center" | "jerusalem" | "south" | "tel-aviv";
+export type RegionId = "north" | "haifa" | "center" | "tel-aviv" | "jerusalem" | "south" | "judea-samaria";
 
+export type EquipmentCategoryId =
+  | "excavators"
+  | "loaders"
+  | "dump-trucks"
+  | "bulldozers"
+  | "graders"
+  | "compactors"
+  | "rollers"
+  | "specialized";
+
+// ─── Content types ───────────────────────────────────────────────────────────
 export interface ProjectStatistic {
   value: string;
   label: Localized;
@@ -68,7 +132,8 @@ export interface Project {
   slug: string;
   title: Localized;
   location: Localized;
-  region: RegionId;
+  /** Omit when unknown — never guess. */
+  region?: RegionId;
   /** Completion year, or start year when `ongoing`. */
   year?: number;
   ongoing?: boolean;
@@ -86,7 +151,8 @@ export interface Project {
   statistics: ProjectStatistic[];
   hero: MediaImage;
   heroVideo?: MediaVideo;
-  images: MediaImage[];
+  /** Gallery — tag each image with its phase where known. */
+  images: (MediaImage & { phase?: "drone" | "before" | "during" | "after" | "machinery" | "team" })[];
   /** [latitude, longitude] */
   coordinates?: [number, number];
   featured: boolean;
@@ -106,14 +172,15 @@ export interface Capability {
   verification: Verification;
 }
 
-export type EquipmentCategoryId = "excavators" | "loaders" | "trucks" | "compactors" | "graders" | "other";
-
 export interface EquipmentItem {
   id: string;
   category: EquipmentCategoryId;
   name: Localized;
+  manufacturer?: string;
+  model?: string;
   /** Number of units, if confirmed. */
-  count?: number;
+  quantity?: number;
+  description?: Localized;
   image: MediaImage;
   verification: Verification;
 }
@@ -157,7 +224,21 @@ export interface Client {
   id: string;
   name: Localized;
   logo?: MediaImage;
-  /** PRD §6.10 — may only be shown once the organization can legally be named / logo use is approved. */
+  relationship?: Localized;
+  relatedProject?: string;
+  /** Asset Strategy §9 — may only be shown once naming / logo use is approved. */
+  permissionConfirmed: boolean;
+  verification: Verification;
+}
+
+export interface Testimonial {
+  id: string;
+  quote: Localized;
+  name: string;
+  position: Localized;
+  company: Localized;
+  project?: string;
+  photo?: MediaImage;
   permissionConfirmed: boolean;
   verification: Verification;
 }
@@ -165,11 +246,17 @@ export interface Client {
 export interface ContactDetails {
   phone: string;
   phoneDisplay: string;
+  mobile?: string;
   whatsapp: string;
   email: string;
+  /** Inbox that receives website leads, if different from `email`. */
+  leadEmail?: string;
+  contactPerson?: Localized;
   address: Localized;
   hours: Localized;
   coordinates?: [number, number];
+  googleMapsUrl?: string;
+  wazeUrl?: string;
   social: { facebook?: string; instagram?: string; linkedin?: string; youtube?: string };
   verification: Verification;
 }

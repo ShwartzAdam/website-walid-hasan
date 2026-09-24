@@ -9,6 +9,7 @@ import { getDictionary } from "@/i18n/dictionaries";
 import { track } from "@/lib/analytics";
 import { href, stripLocale } from "@/lib/site";
 import { CloseIcon, MenuIcon } from "@/components/ui/Icons";
+import { LogoMark } from "@/components/ui/Logo";
 
 const NAV = ["projects", "capabilities", "about", "contact"] as const;
 
@@ -58,12 +59,15 @@ export function SiteHeader({ locale }: { locale: Locale }) {
       }`}
     >
       <div className="container-x flex h-16 items-center justify-between gap-6 md:h-20">
-        <Link href={href(locale)} className="group flex flex-col leading-none" onClick={() => setOpen(false)}>
-          <span className="font-display text-lg font-bold tracking-[0.12em] rtl:tracking-normal md:text-xl">
-            {dict.common.brand}
-          </span>
-          <span className="mt-1 text-[10px] tracking-[0.2em] text-sand/70 uppercase rtl:tracking-normal">
-            {dict.common.tagline.join(" · ")}
+        <Link href={href(locale)} className="group flex items-center gap-3" onClick={() => setOpen(false)}>
+          <LogoMark className="h-8 w-8 shrink-0 md:h-9 md:w-9" />
+          <span className="flex flex-col leading-none">
+            <span className="font-display text-lg font-bold tracking-[0.12em] rtl:tracking-normal md:text-xl">
+              {dict.common.brand}
+            </span>
+            <span className="mt-1 text-[10px] tracking-[0.2em] text-sand/70 uppercase rtl:tracking-normal">
+              {dict.common.tagline.join(" · ")}
+            </span>
           </span>
         </Link>
 

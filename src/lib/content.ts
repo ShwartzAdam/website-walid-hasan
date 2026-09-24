@@ -4,23 +4,28 @@ import {
   credentials as allCredentials,
   equipment as allEquipment,
   stats as allStats,
+  testimonials as allTestimonials,
 } from "@/content/company";
 import { projects as allProjects } from "@/content/projects";
 import type { CapabilityId, CategoryId, Project, Verification } from "@/content/types";
+import { contentMode } from "./mode";
 
 /**
  * Content repository. Pages read content only through these functions so the
  * source can later move to a headless CMS (PRD §16, §19) without touching UI code.
  */
 
-export const contentMode = process.env.CONTENT_MODE === "strict" ? "strict" : "preview";
+export { contentMode };
 
+/** DO_NOT_PUBLISH is never shown; NEEDS_CONFIRMATION only in preview. */
 export function isPublishable(item: { verification: Verification }): boolean {
-  return contentMode === "preview" || item.verification.status !== "unverified";
+  const { status } = item.verification;
+  if (status === "do-not-publish") return false;
+  return contentMode === "preview" || status === "verified";
 }
 
 export function isPending(item: { verification: Verification }): boolean {
-  return item.verification.status === "unverified";
+  return item.verification.status === "needs-confirmation";
 }
 
 function byFeaturedOrder(a: Project, b: Project) {
@@ -49,7 +54,7 @@ export function getRelatedProjects(project: Project, limit = 3): Project[] {
       score:
         p.categories.filter((c) => project.categories.includes(c)).length * 2 +
         p.capabilities.filter((c) => project.capabilities.includes(c)).length +
-        (p.region === project.region ? 1 : 0),
+        (p.region && p.region === project.region ? 1 : 0),
     }))
     .sort((a, b) => b.score - a.score)
     .slice(0, limit)
@@ -87,4 +92,9 @@ export function getEquipment() {
 /** Clients additionally require explicit naming/logo permission (PRD §6.10). */
 export function getClients() {
   return allClients.filter((c) => c.permissionConfirmed && isPublishable(c));
+}
+
+/** Testimonials need explicit permission too (Asset Strategy §10). */
+export function getTestimonials() {
+  return allTestimonials.filter((t) => t.permissionConfirmed && isPublishable(t));
 }

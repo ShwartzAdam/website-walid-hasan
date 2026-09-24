@@ -90,7 +90,7 @@ export function CapabilitiesShowcase({ locale, items }: Props) {
       </div>
 
       {/* Mobile / tablet: horizontal swipe cards */}
-      <ul className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 sm:-mx-8 sm:px-8 lg:hidden">
+      <ul className="no-scrollbar -mx-4 flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto px-4 pb-2 sm:-mx-8 sm:scroll-px-8 sm:px-8 lg:hidden">
         {items.map((item, i) => (
           <li key={item.id} className="w-[78vw] max-w-sm shrink-0 snap-start">
             <Link href={href(locale, `/capabilities/${item.id}`)} className="block">

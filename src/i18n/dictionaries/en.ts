@@ -63,6 +63,7 @@ const en = {
     email: "Email",
     pendingVerification: "Pending verification",
     photoPending: "Photo pending",
+    illustration: "Illustration",
     location: "Location",
     client: "Client",
     year: "Year",
@@ -77,6 +78,15 @@ const en = {
     introHeadline: "Building the infrastructure behind growing communities.",
     introBody:
       "Walid Hasan is an infrastructure, development and earthworks contractor. We prepare the ground, lay the networks and build the roads that new neighborhoods and public projects depend on — with our own crews and our own heavy equipment, from the first cut to final handover.",
+    buildEyebrow: "How it's built",
+    buildHeadline: "From ground to community.",
+    buildStages: [
+      { title: "Ground", body: "Everything starts with the ground: survey, excavation, fill and compaction." },
+      { title: "Infrastructure", body: "Below the surface: water, sewer and drainage networks." },
+      { title: "Development", body: "Roads, sidewalks and retaining walls tie it all together." },
+      { title: "Community", body: "The place where people live." },
+    ],
+    testimonialsEyebrow: "In their words",
     capabilitiesEyebrow: "What we build",
     capabilitiesHeadline: "Capabilities",
     projectsEyebrow: "Selected work",
@@ -176,6 +186,7 @@ const en = {
   },
   footer: {
     rights: "All rights reserved.",
+    companyNumberLabel: "Company no.",
     licenseLabel: "Contractor license",
     explore: "Explore",
     contact: "Contact",

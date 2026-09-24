@@ -135,9 +135,9 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
               ))}
             </ul>
             {credentials.length > 0 && (
-              <dl className="mt-12 grid gap-px bg-sand sm:grid-cols-3">
+              <dl className="mt-12 grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
                 {credentials.map((c) => (
-                  <div key={c.id} className="bg-paper py-6 pe-6">
+                  <div key={c.id} className="border-t border-sand py-6 pe-6">
                     <dt className="text-sm text-steel">{c.label[locale]}</dt>
                     <dd dir="ltr" className="mt-2 font-display text-4xl font-bold tabular-nums rtl:text-end">
                       {c.value}

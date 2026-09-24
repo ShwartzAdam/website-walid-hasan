@@ -4,6 +4,7 @@ import type { Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { mailHref, telHref, whatsappHref } from "@/lib/contact-links";
 import { href } from "@/lib/site";
+import { LogoMark } from "@/components/ui/Logo";
 
 export function SiteFooter({ locale }: { locale: Locale }) {
   const dict = getDictionary(locale);
@@ -13,11 +14,21 @@ export function SiteFooter({ locale }: { locale: Locale }) {
     <footer className="bg-ink pb-24 text-sand md:pb-0">
       <div className="container-x grid gap-12 border-t border-graphite py-16 md:grid-cols-12">
         <div className="md:col-span-5">
-          <p className="font-display text-3xl font-bold text-paper">{dict.common.brand}</p>
-          <p className="mt-2 text-sm text-stone">{company.legalName[locale]}</p>
-          <p className="mt-6 text-sm">
-            {dict.footer.licenseLabel}: <span dir="ltr" className="text-paper tabular-nums">{company.licenseNumber}</span>
+          <p className="flex items-center gap-3 font-display text-3xl font-bold text-paper">
+            <LogoMark className="h-10 w-10" />
+            {dict.common.brand}
           </p>
+          <p className="mt-3 text-sm text-stone">{company.legalName[locale]}</p>
+          <dl className="mt-6 space-y-1 text-sm">
+            <div className="flex gap-2">
+              <dt>{dict.footer.companyNumberLabel}:</dt>
+              <dd dir="ltr" className="text-paper tabular-nums">{company.companyNumber}</dd>
+            </div>
+            <div className="flex gap-2">
+              <dt>{dict.footer.licenseLabel}:</dt>
+              <dd dir="ltr" className="text-paper tabular-nums">{company.licenseNumber}</dd>
+            </div>
+          </dl>
         </div>
         <nav className="md:col-span-3" aria-label={dict.footer.explore}>
           <p className="eyebrow mb-5 text-stone">{dict.footer.explore}</p>

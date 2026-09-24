@@ -70,9 +70,9 @@ export default async function ProjectPage({ params }: PageProps<"/[locale]/proje
       {/* Project information */}
       <section className="border-b border-sand bg-paper">
         <div className="container-x">
-          <dl className="grid grid-cols-2 gap-px bg-sand md:grid-cols-5">
+          <dl className="grid grid-cols-2 gap-x-6 md:grid-cols-5">
             {facts.map(([label, value]) => (
-              <div key={label} className="bg-paper py-6 pe-4">
+              <div key={label} className="border-t border-sand py-6 pe-4 md:border-t-0">
                 <dt className="text-xs tracking-[0.16em] text-steel uppercase rtl:tracking-normal">{label}</dt>
                 <dd className="mt-2 font-semibold">{value}</dd>
               </div>

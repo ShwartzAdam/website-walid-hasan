@@ -55,7 +55,7 @@ export function ProjectMap({ locale, projects }: { locale: Locale; projects: Map
         zoomControl: false,
         attributionControl: true,
       });
-      L.control.zoom({ position: "bottomright" }).addTo(map);
+      L.control.zoom({ position: "topright" }).addTo(map);
       L.tileLayer(TILE_URL, { attribution: TILE_ATTRIBUTION, subdomains: "abcd", maxZoom: 19 }).addTo(map);
 
       for (const p of projects) {

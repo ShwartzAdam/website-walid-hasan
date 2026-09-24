@@ -11,6 +11,8 @@ const staticExport = process.env.STATIC_EXPORT === "true";
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 const nextConfig: NextConfig = {
+  // Inline the publishing mode so server and client components agree (src/lib/mode.ts).
+  env: { CONTENT_MODE: process.env.CONTENT_MODE === "strict" ? "strict" : "preview" },
   ...(staticExport && {
     output: "export",
     trailingSlash: true,

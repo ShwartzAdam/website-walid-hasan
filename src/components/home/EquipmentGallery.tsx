@@ -10,7 +10,7 @@ import { PendingTag } from "@/components/ui/PendingTag";
 
 interface Props {
   locale: Locale;
-  items: (Pick<EquipmentItem, "id" | "name" | "count" | "image"> & { pending: boolean; categoryLabel: string })[];
+  items: (Pick<EquipmentItem, "id" | "name" | "quantity" | "image"> & { model?: string; pending: boolean; categoryLabel: string })[];
 }
 
 /** Horizontal, scroll-snapped equipment gallery (PRD §6.7). Direction-aware for RTL. */
@@ -37,7 +37,7 @@ export function EquipmentGallery({ locale, items }: Props) {
       </div>
       <ul
         ref={track}
-        className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-4 sm:-mx-8 sm:px-8 xl:-mx-14 xl:px-14"
+        className="no-scrollbar -mx-4 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto scroll-smooth px-4 sm:-mx-8 sm:scroll-px-8 sm:px-8 xl:-mx-14 xl:scroll-px-14 xl:px-14"
       >
         {items.map((item) => (
           <li key={item.id} className="w-[75vw] shrink-0 snap-start sm:w-[45vw] lg:w-[30vw] xl:w-[26rem]">
@@ -50,9 +50,14 @@ export function EquipmentGallery({ locale, items }: Props) {
                 <span>
                   <span className="block text-xs text-stone">{item.categoryLabel}</span>
                   <span className="mt-1 block font-display text-xl font-bold">{item.name[locale]}</span>
+                  {item.model && (
+                    <span dir="ltr" className="mt-1 block text-start text-xs text-sand rtl:text-end">
+                      {item.model}
+                    </span>
+                  )}
                 </span>
-                {item.count !== undefined && (
-                  <span className="font-display text-3xl font-bold text-signal tabular-nums">×{item.count}</span>
+                {item.quantity !== undefined && (
+                  <span className="font-display text-3xl font-bold text-signal tabular-nums">×{item.quantity}</span>
                 )}
               </figcaption>
             </figure>

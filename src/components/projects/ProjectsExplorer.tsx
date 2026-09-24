@@ -56,7 +56,7 @@ export function ProjectsExplorer({
   };
 
   const options = useMemo(() => {
-    const regionIds = [...new Set(projects.map((p) => p.region))];
+    const regionIds = [...new Set(projects.map((p) => p.region).filter((r): r is RegionId => !!r))];
     const categoryIds = [...new Set(projects.flatMap((p) => p.categories))];
     const years = [...new Set(projects.map((p) => p.year).filter((y): y is number => !!y))].sort((a, b) => b - a);
     return { regionIds, categoryIds, years };
