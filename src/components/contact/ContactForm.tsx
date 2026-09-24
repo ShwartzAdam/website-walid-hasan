@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { contact } from "@/content/company";
 import { categories } from "@/content/taxonomy";
 import type { Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -15,6 +16,15 @@ import {
 } from "@/lib/contact-schema";
 
 type Status = "idle" | "sending" | "success" | "error";
+
+/**
+ * Where inquiries are posted. The server build uses its own /api/contact route.
+ * A static build (GitHub Pages) has no server, so it posts to
+ * NEXT_PUBLIC_CONTACT_ENDPOINT (e.g. a Formspree / Basin / Getform URL) when
+ * set, and otherwise hands the inquiry to the visitor's email app.
+ */
+const STATIC = process.env.NEXT_PUBLIC_STATIC_EXPORT === "true";
+const ENDPOINT = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT || (STATIC ? "" : "/api/contact");
 
 export function ContactForm({ locale }: { locale: Locale }) {
   const dict = getDictionary(locale);
@@ -42,12 +52,23 @@ export function ContactForm({ locale }: { locale: Locale }) {
       return;
     }
 
+    if (!ENDPOINT) {
+      const body = Object.entries(input)
+        .filter(([, v]) => v)
+        .map(([k, v]) => `${t.fields[k as keyof typeof t.fields] ?? k}: ${v}`)
+        .join("\n");
+      track("contact_form_submit", { locale, project_type: input.type || "unspecified", files: 0, channel: "mailto" });
+      window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(`${t.formTitle} — ${input.name}`)}&body=${encodeURIComponent(body)}`;
+      return;
+    }
+
     setStatus("sending");
     data.set("locale", locale);
     try {
-      const res = await fetch("/api/contact", { method: "POST", body: data });
+      const res = await fetch(ENDPOINT, { method: "POST", body: data, headers: { Accept: "application/json" } });
       const json = (await res.json().catch(() => ({}))) as { ok?: boolean; errors?: Record<string, FieldError> };
-      if (res.ok && json.ok) {
+      // Our API answers { ok: true }; third-party form services answer 2xx with their own shape.
+      if (res.ok && (json.ok ?? true)) {
         setStatus("success");
         track("contact_form_submit", { locale, project_type: input.type || "unspecified", files: files.length });
         form.reset();

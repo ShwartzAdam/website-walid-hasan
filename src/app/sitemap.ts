@@ -4,6 +4,8 @@ import { contentMode, getCapabilities, getProjects } from "@/lib/content";
 import { languageAlternates } from "@/lib/seo";
 import { absoluteUrl, href } from "@/lib/site";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   // Draft previews are not indexable, so they publish an empty sitemap.
   if (contentMode !== "strict") return [];

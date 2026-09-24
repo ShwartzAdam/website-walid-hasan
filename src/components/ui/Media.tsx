@@ -20,13 +20,17 @@ interface MediaProps {
  * "photo pending" slot showing the shot brief, so layouts can be reviewed
  * without resorting to stock photography (PRD §14).
  */
+// next/image does not prefix basePath onto unoptimized local sources (static export).
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+const withBasePath = (src: string) => (src.startsWith("/") && !src.startsWith("//") ? `${basePath}${src}` : src);
+
 export function Media({ image, locale, sizes, priority, className = "", tone = "dark" }: MediaProps) {
   const alt = image.alt[locale];
   if (image.src) {
     return (
       <div className={`relative overflow-hidden ${className}`}>
         <Image
-          src={image.src}
+          src={withBasePath(image.src)}
           alt={alt}
           fill
           sizes={sizes}

@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "check:content": "tsx scripts/check-content.ts"
+    "check:content": "tsx scripts/check-content.ts",
+    "build:pages": "node scripts/build-pages.mjs"
   },
   "dependencies": {
     "leaflet": "^1.9.4",

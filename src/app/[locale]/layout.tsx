@@ -31,7 +31,8 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
   if (!isLocale(locale)) return {};
   const dict = getDictionary(locale);
   return {
-    metadataBase: new URL(siteUrl),
+    // Origin only: Next adds basePath to metadata file URLs itself.
+    metadataBase: new URL(new URL(siteUrl).origin),
     title: { default: dict.meta.home.title, template: `%s | ${dict.meta.siteName}` },
     description: dict.meta.defaultDescription,
     applicationName: dict.meta.siteName,

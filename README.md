@@ -48,6 +48,32 @@ src/
 - **Accessibility (§20):** semantic landmarks, skip link, visible focus states, labelled form fields with announced errors, and a list alternative to the map.
 - **Analytics (§21):** GA4 through `NEXT_PUBLIC_GA_ID`. It tracks form submissions and errors, WhatsApp, phone and email clicks, project views, filter usage, language selection and CTA clicks.
 
+## GitHub Pages (static preview)
+
+The workflow `.github/workflows/pages.yml` publishes a static build to
+`https://shwartzadam.github.io/website-walid-hasan/` whenever `main` or
+`claude/walid-hasan-website-jqtwcg` is pushed. It can also be run by hand
+from the Actions tab.
+
+**First-time setup:** go to repository **Settings → Pages → Build and deployment → Source** and choose **GitHub Actions**, then re-run the workflow.
+
+Pages only serves static files, so `npm run build:pages` makes these changes:
+
+- `proxy.ts` and `/api/contact` are left out of the static build (and restored afterwards).
+- `/` becomes a small page that sends visitors to `/he/`, `/ar/` or `/en/` based on their saved choice or browser language.
+- The contact form posts to `NEXT_PUBLIC_CONTACT_ENDPOINT` if you set one as a repository variable, for example a Formspree or Basin form URL. If not, it opens the visitor's email app with the details filled in; files can't be attached that way.
+- Images are served without Next's optimisation server.
+
+Optional repository variables are `CONTENT_MODE`, `NEXT_PUBLIC_GA_ID` and `NEXT_PUBLIC_CONTACT_ENDPOINT`.
+
+To try the static build locally:
+
+```bash
+NEXT_PUBLIC_BASE_PATH=/website-walid-hasan npm run build:pages   # output in ./out
+```
+
+For the production launch, a Node host such as Vercel is still recommended. It adds server-side language detection, the contact API with file uploads, and image optimisation.
+
 ## Environment
 
 See `.env.example`. The key settings:
