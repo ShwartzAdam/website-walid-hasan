@@ -29,6 +29,16 @@ const RESEARCH: Verification = {
   notes: "Verify against the Registrar of Contractors and the company's own certificate before publication.",
 };
 
+/** Registrar of Contractors listing for contractor no. 28803, as supplied by the site owner (via a business-data site). */
+const REGISTRAR: Verification = {
+  status: "needs-confirmation",
+  basis: "public-source",
+  source: "Registrar of Contractors — listing for contractor no. 28803",
+  checkedAt: "2026-09-25",
+  notes:
+    "Listing confirms contractor no. 28803 under the registered name, registered in: construction (02.01.2013, 5,332,000 ₪), roads, infrastructure & development (18.02.2025), water, sewer & drainage (03.04.2019, 25,529,000 ₪) and pumping-station electromechanical systems (03.01.2020, 3,192,000 ₪). The listing does not show classification letters — confirm them against the certificate.",
+};
+
 const MOF: Verification = {
   status: "needs-confirmation",
   basis: "public-source",
@@ -94,7 +104,10 @@ export const stats: CompanyStat[] = [
     id: "classifications",
     value: 4,
     label: { he: "סיווגים בפנקס הקבלנים", ar: "تصنيفات في سجل المقاولين", en: "Registered classifications" },
-    verification: { ...RESEARCH, notes: "G1, G5, B4, B1 per research — confirm the full list." },
+    verification: {
+      ...REGISTRAR,
+      notes: "The Registrar listing shows four registered fields (construction, roads, water/sewer, pumping stations); letters G1, G5, B4, B1 are from research — confirm against the certificate.",
+    },
   },
 ];
 
@@ -112,35 +125,38 @@ export const credentials: Credential[] = [
     label: { he: "מספר קבלן", ar: "رقم المقاول", en: "Contractor No." },
     value: "28803",
     detail: { he: "רשם הקבלנים", ar: "مسجّل المقاولين", en: "Registrar of Contractors" },
-    verification: RESEARCH,
+    verification: REGISTRAR,
   },
   {
     id: "class-roads",
     label: { he: "כבישים, תשתיות ופיתוח", ar: "طرق، بنية تحتية وتطوير", en: "Roads, Infrastructure & Development" },
     value: "G5",
     detail: { he: "ענף 200 · סיווג ג׳5", ar: "فرع 200 · تصنيف G5", en: "Branch 200 · Classification G5" },
-    verification: { ...RESEARCH, notes: "One public summary described this as group G, classification 4 — confirm G5 against the certificate." },
+    verification: {
+      ...REGISTRAR,
+      notes: "Registered 18.02.2025 per the Registrar listing (no amount shown). One public summary described this as group G, classification 4 — confirm G5 against the certificate.",
+    },
   },
   {
     id: "class-water",
     label: { he: "מים, ביוב וניקוז", ar: "مياه، صرف صحي وتصريف", en: "Water, Sewer & Drainage" },
     value: "B4",
     detail: { he: "ענף 260 · סיווג ב׳4", ar: "فرع 260 · تصنيف B4", en: "Branch 260 · Classification B4" },
-    verification: RESEARCH,
+    verification: { ...REGISTRAR, notes: "Registered 03.04.2019, 25,529,000 ₪ per the Registrar listing. Confirm B4 against the certificate." },
   },
   {
     id: "class-construction",
     label: { he: "בנייה", ar: "بناء", en: "Construction" },
     value: "G1",
     detail: { he: "סיווג ג׳1", ar: "تصنيف G1", en: "Classification G1" },
-    verification: RESEARCH,
+    verification: { ...REGISTRAR, notes: "Registered 02.01.2013, 5,332,000 ₪ per the Registrar listing. Confirm G1 against the certificate." },
   },
   {
     id: "class-pumping",
     label: { he: "מערכות אלקטרומכניות לתחנות שאיבה", ar: "أنظمة كهروميكانيكية لمحطات الضخ", en: "Pumping-Station Electromechanical Systems" },
     value: "B1",
     detail: { he: "סיווג ב׳1", ar: "تصنيف B1", en: "Classification B1" },
-    verification: RESEARCH,
+    verification: { ...REGISTRAR, notes: "Registered 03.01.2020, 3,192,000 ₪ per the Registrar listing. Confirm B1 against the certificate." },
   },
   {
     id: "recognised-contractor",
@@ -222,7 +238,11 @@ export const leadership: Person[] = [
       alt: { he: "וליד חסן", ar: "وليد حسن", en: "Walid Hasan" },
       brief: "Environmental portrait on site",
     },
-    verification: { status: "needs-confirmation", notes: "Confirm title and approve photo." },
+    verification: {
+      status: "needs-confirmation",
+      notes:
+        "Confirm title and approve photo. The company registry (updated 6.7.2026) lists Hossam Hasan, Zeid Hasan and Asad Hasan as directors and shareholders, and Walid Hasan in neither role — confirm who should appear under leadership.",
+    },
   },
 ];
 
@@ -359,14 +379,14 @@ export const testimonials: Testimonial[] = [];
 
 // ─── Contact ─────────────────────────────────────────────────────────────────
 export const contact: ContactDetails = {
-  phone: "+972000000000",
-  phoneDisplay: "000-000-0000",
-  whatsapp: "972000000000",
-  email: "office@walidhasan.co.il",
+  phone: "+972507225131",
+  phoneDisplay: "050-722-5131",
+  whatsapp: "972507225131",
+  email: "hossam@whs10.com",
   address: {
-    he: "כתובת המשרד תעודכן",
-    ar: "عنوان المكتب سيُحدَّث",
-    en: "Office address to be confirmed",
+    he: "טירה, ת.ד. 850",
+    ar: "الطيرة، ص.ب. 850",
+    en: "Tira, P.O. Box 850",
   },
   hours: {
     he: "א׳–ה׳ 07:00–17:00",
@@ -380,6 +400,6 @@ export const contact: ContactDetails = {
   verification: {
     status: "needs-confirmation",
     notes:
-      "PLACEHOLDER phone / WhatsApp / email / address / hours. Research found a Waze listing and a Dun's Guide entry — take the details from the company, then add googleMapsUrl / wazeUrl / coordinates.",
+      "Phone, email and address (Tira, P.O. Box 850) come from the Registrar of Contractors listing for contractor no. 28803. Confirm that the mobile takes WhatsApp, that this is the email for website leads (it is a personal mailbox), and the street address of the office. Hours are still a PLACEHOLDER. Then add googleMapsUrl / wazeUrl / coordinates.",
   },
 };
