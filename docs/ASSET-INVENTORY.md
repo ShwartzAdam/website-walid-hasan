@@ -10,7 +10,7 @@ Priority for every asset: **Original → Web → Generated → Placeholder**. GE
 | 🔵 WEB | 10 |
 | 🟣 GENERATED | 24 |
 | 🟡 NEEDS_CONFIRMATION | 6 |
-| 🔴 MISSING | 6 |
+| 🔴 MISSING | 9 |
 
 ## Research sources & required assets
 
@@ -18,7 +18,7 @@ Priority for every asset: **Original → Web → Generated → Placeholder**. GE
 |---|---|---|---|---|---|---|---|---|
 | R-mof-registry | Credentials | Recognised contractor listing — company 513785527 | 🔵 WEB | [Ministry of Finance — recognised contractors registry](https://asset.mof.gov.il/contractorRepository/s/) | Registered name "וליד חסן תשתיות עפר ופיתוח בע״מ", company no. 513785527, certificate 13.11.2024–13.11.2026, sub-branches 200 and 260 | not-required | high | Shown as NEEDS_CONFIRMATION (credentials, timeline) |
 | R-classifications | Credentials | Contractor no. 28803 · G1 · G5 · B4 · B1 | 🟡 NEEDS_CONFIRMATION | Earlier research (Asset Strategy §8) | Contractor number and classifications | not-required | medium | Shown as NEEDS_CONFIRMATION |
-| R-registrar-listing | Credentials | Registrar of Contractors listing — contractor no. 28803 | 🟡 NEEDS_CONFIRMATION | Registrar of Contractors data, supplied by the site owner via a business-data site | Contractor no. 28803; fields: construction (2013), roads/infrastructure (2025), water/sewer/drainage (2019), pumping-station electromechanical (2020); phone, email and P.O. box address; directors and shareholders | not-required | high | Shown as NEEDS_CONFIRMATION (credentials, contact details) |
+| R-registrar-listing | Credentials | Registrar of Contractors listing — contractor no. 28803 | 🟡 NEEDS_CONFIRMATION | Registrar of Contractors data, supplied by the site owner via a business-data site | Contractor no. 28803; fields: construction (2013), roads/infrastructure (2025), water/sewer/drainage (2019), pumping-station electromechanical (2020); phone, email and P.O. box address; directors and shareholders | not-required | high | Shown as NEEDS_CONFIRMATION (credentials, contact details, leadership) |
 | R-facebook-page | Company | Company Facebook page | 🔵 WEB | [Facebook — page titled "וליד חסן תשתיות עפר ופיתוח בע״מ"](https://www.facebook.com/100063619101665/) | Official social presence; albums and videos of company works | requested | high | Linked in footer (social) |
 | R-facebook-album | Projects | Company Facebook photo album | 🔵 WEB | [link](https://www.facebook.com/100063619101665/albums/116975663112678/) | Photos of company works | requested | high | Not used — originals requested |
 | R-facebook-video | Video | Company Facebook video | 🔵 WEB | [link](https://www.facebook.com/100063619101665/videos/2738968216172908/) | Video footage of company works (candidate for hero / project video) | requested | high | Not used — original file requested |
@@ -67,3 +67,6 @@ Priority for every asset: **Original → Web → Generated → Placeholder**. GE
 | M-equipment:rollers | Equipment | Company-owned rollers with logo visible | 🟣 GENERATED |  |  | n/a |  | GENERATED: equipment-roller |
 | M-equipment:graders | Equipment | Company-owned motor graders with logo visible | 🟣 GENERATED |  |  | n/a |  | GENERATED: equipment-grader |
 | M-person:walid-hasan | Company | Environmental portrait on site | 🔴 MISSING |  |  | n/a |  | Placeholder |
+| M-person:hossam-hasan | Company | Environmental portrait on site | 🔴 MISSING |  |  | n/a |  | Placeholder |
+| M-person:zeid-hasan | Company | Environmental portrait on site | 🔴 MISSING |  |  | n/a |  | Placeholder |
+| M-person:asad-hasan | Company | Environmental portrait on site | 🔴 MISSING |  |  | n/a |  | Placeholder |

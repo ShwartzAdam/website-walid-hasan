@@ -78,7 +78,7 @@ export const inventory: InventoryItem[] = [
       "Contractor no. 28803; fields: construction (2013), roads/infrastructure (2025), water/sewer/drainage (2019), pumping-station electromechanical (2020); phone, email and P.O. box address; directors and shareholders",
     usagePermission: "not-required",
     confidence: "high",
-    finalStatus: "Shown as NEEDS_CONFIRMATION (credentials, contact details)",
+    finalStatus: "Shown as NEEDS_CONFIRMATION (credentials, contact details, leadership)",
     notes: "Listing does not show classification letters. Directors/shareholders listed: Hossam, Zeid and Asad Hasan.",
   },
   {
