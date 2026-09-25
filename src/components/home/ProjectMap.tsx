@@ -37,6 +37,8 @@ export function ProjectMap({ locale, projects }: { locale: Locale; projects: Map
   const mapRef = useRef<LeafletMap | null>(null);
   const markers = useRef<Map<string, Marker>>(new Map());
   const [active, setActive] = useState<string>(projects[0]?.slug ?? "");
+  // With only a pin or two, a full-height map is mostly empty space.
+  const compact = projects.length < 3;
 
   useEffect(() => {
     const el = container.current;
@@ -112,7 +114,9 @@ export function ProjectMap({ locale, projects }: { locale: Locale; projects: Map
           dir="ltr"
           role="region"
           aria-label={dict.a11y.mapLabel}
-          className="aspect-[4/5] w-full bg-asphalt sm:aspect-[16/11] lg:aspect-auto lg:h-[70vh]"
+          className={`w-full bg-asphalt ${
+            compact ? "aspect-[4/3] sm:aspect-[16/9] lg:aspect-auto lg:h-[28rem]" : "aspect-[4/5] sm:aspect-[16/11] lg:aspect-auto lg:h-[70vh]"
+          }`}
         />
         {current && (
           <div className="pointer-events-none absolute inset-x-3 bottom-3 z-[500] sm:inset-x-auto sm:start-4 sm:bottom-4 sm:w-80">

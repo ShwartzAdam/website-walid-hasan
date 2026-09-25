@@ -10,3 +10,5 @@ next-env.d.ts
 npm-debug.log*
 .screenshots/
 .pages-aside/
+AGENTS.md
+CLAUDE.md

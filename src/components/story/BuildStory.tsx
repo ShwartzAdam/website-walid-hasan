@@ -45,7 +45,7 @@ export function BuildStory({ locale }: { locale: Locale }) {
   const active = Math.min(stages.length - 1, Math.floor(progress * stages.length * 0.999 + 0.08));
 
   return (
-    <section ref={ref} className="relative bg-ink text-paper" style={{ height: `${stages.length * 90 + 40}svh` }}>
+    <section ref={ref} className="relative bg-ink text-paper" style={{ height: `${stages.length * 55 + 50}svh` }}>
       <div className="sticky top-0 h-svh overflow-hidden">
         <div style={{ transform: `scale(${1.12 - 0.12 * progress})` }} className="absolute inset-0 will-change-transform" aria-hidden>
           {LAYERS.map((id, i) => {

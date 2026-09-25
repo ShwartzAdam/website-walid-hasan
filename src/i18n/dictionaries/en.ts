@@ -74,6 +74,7 @@ const en = {
     backToProjects: "Back to projects",
   },
   home: {
+    heroLead: "Infrastructure, development and earthworks contractor — our own crews and heavy equipment, from the first cut to final handover.",
     introEyebrow: "The company",
     introHeadline: "Building the infrastructure behind growing communities.",
     introBody:
@@ -179,6 +180,8 @@ const en = {
       phone: "Please enter a valid phone number.",
       files: "Files are too large or of an unsupported type.",
     },
+    chooseFiles: "Choose files",
+    noFiles: "No files selected",
     privacy: "Your details are used only to respond to your inquiry.",
     directTitle: "Direct contact",
     officeTitle: "Office",

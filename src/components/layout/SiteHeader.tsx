@@ -66,7 +66,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
               <span className="font-display text-lg font-bold tracking-[0.12em] rtl:tracking-normal md:text-xl">
                 {dict.common.brand}
               </span>
-              <span className="mt-1 text-[10px] tracking-[0.2em] text-sand/70 uppercase rtl:tracking-normal">
+              <span className="mt-1 text-xs tracking-[0.16em] text-sand/80 uppercase rtl:tracking-normal">
                 {dict.common.tagline.join(" · ")}
               </span>
             </span>
@@ -88,7 +88,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
           </nav>
 
           <div className="flex items-center gap-4">
-            <ul className="hidden items-center gap-1 text-xs sm:flex" aria-label={dict.a11y.language}>
+            <ul className="hidden items-center text-sm sm:flex" aria-label={dict.a11y.language}>
               {locales.map((l) => (
                 <li key={l}>
                   <Link
@@ -98,7 +98,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
                     aria-current={l === locale ? "true" : undefined}
                     title={localeNames[l]}
                     onClick={() => rememberLocale(l)}
-                    className={`block px-2 py-1.5 transition-colors ${
+                    className={`flex min-h-11 min-w-11 items-center justify-center px-2 transition-colors ${
                       l === locale ? "text-signal" : "text-sand/70 hover:text-paper"
                     }`}
                   >
@@ -119,7 +119,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             <button
               ref={menuButton}
               type="button"
-              className="-me-2 p-2 lg:hidden"
+              className="-me-2.5 p-2.5 lg:hidden"
               aria-expanded={open}
               aria-controls="mobile-menu"
               aria-label={open ? dict.a11y.closeMenu : dict.a11y.openMenu}
@@ -174,7 +174,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
                         rememberLocale(l);
                         setOpen(false);
                       }}
-                      className={l === locale ? "text-signal" : "text-sand"}
+                      className={`inline-flex min-h-11 items-center ${l === locale ? "text-signal" : "text-sand"}`}
                     >
                       {localeNames[l]}
                     </Link>

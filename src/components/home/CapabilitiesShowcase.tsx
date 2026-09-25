@@ -42,7 +42,7 @@ export function CapabilitiesShowcase({ locale, items }: Props) {
                 <span className="w-8 text-xs tabular-nums text-stone">{String(i + 1).padStart(2, "0")}</span>
                 <span
                   className={`font-display text-[clamp(2rem,4.2vw,4.25rem)] leading-none font-bold uppercase transition-colors duration-500 rtl:normal-case ${
-                    i === active ? "text-paper" : "text-graphite group-hover:text-steel"
+                    i === active ? "text-paper" : "text-stone group-hover:text-sand"
                   }`}
                 >
                   {item.title[locale]}
