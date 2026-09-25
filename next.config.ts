@@ -25,6 +25,8 @@ const nextConfig: NextConfig = {
     deviceSizes: [640, 828, 1080, 1280, 1600, 1920, 2560],
   },
   poweredByHeader: false,
+  // Don't write AGENTS.md / CLAUDE.md into the repo on `next dev`.
+  agentRules: false,
   ...(!staticExport && {
     async headers() {
       return [

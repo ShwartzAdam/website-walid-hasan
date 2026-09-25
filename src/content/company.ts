@@ -85,13 +85,6 @@ export const stats: CompanyStat[] = [
     verification: { status: "needs-confirmation", basis: "prd", source: "PRD §6.5 example", notes: "Confirm founding year." },
   },
   {
-    id: "license",
-    value: 28803,
-    raw: true,
-    label: { he: "מספר קבלן רשום", ar: "رقم المقاول المسجّل", en: "Registered contractor no." },
-    verification: RESEARCH,
-  },
-  {
     id: "classification",
     value: "G5",
     label: { he: "כבישים, תשתיות ופיתוח", ar: "طرق، بنية تحتية وتطوير", en: "Roads, Infrastructure & Development" },

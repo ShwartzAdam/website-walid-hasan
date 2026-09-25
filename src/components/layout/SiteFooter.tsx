@@ -31,11 +31,11 @@ export function SiteFooter({ locale }: { locale: Locale }) {
           </dl>
         </div>
         <nav className="md:col-span-3" aria-label={dict.footer.explore}>
-          <p className="eyebrow mb-5 text-stone">{dict.footer.explore}</p>
-          <ul className="space-y-3 text-sm">
+          <p className="eyebrow mb-3 text-stone">{dict.footer.explore}</p>
+          <ul className="text-sm">
             {(["projects", "capabilities", "about", "contact"] as const).map((key) => (
               <li key={key}>
-                <Link href={href(locale, `/${key}`)} className="hover:text-signal">
+                <Link href={href(locale, `/${key}`)} className="inline-flex min-h-11 items-center hover:text-signal">
                   {dict.nav[key]}
                 </Link>
               </li>
@@ -43,30 +43,30 @@ export function SiteFooter({ locale }: { locale: Locale }) {
           </ul>
         </nav>
         <div className="md:col-span-4">
-          <p className="eyebrow mb-5 text-stone">{dict.footer.contact}</p>
-          <ul className="space-y-3 text-sm">
+          <p className="eyebrow mb-3 text-stone">{dict.footer.contact}</p>
+          <ul className="text-sm">
             <li>
-              <a href={telHref()} className="hover:text-signal" dir="ltr">
+              <a href={telHref()} className="inline-flex min-h-11 items-center hover:text-signal" dir="ltr">
                 {contact.phoneDisplay}
               </a>
             </li>
             <li>
-              <a href={whatsappHref()} target="_blank" rel="noopener noreferrer" className="hover:text-signal">
+              <a href={whatsappHref()} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center hover:text-signal">
                 {dict.common.whatsapp}
               </a>
             </li>
             <li>
-              <a href={mailHref()} className="hover:text-signal">
+              <a href={mailHref()} className="inline-flex min-h-11 items-center hover:text-signal">
                 {contact.email}
               </a>
             </li>
-            <li className="text-stone">{contact.address[locale]}</li>
+            <li className="py-3 text-stone">{contact.address[locale]}</li>
           </ul>
           {social.length > 0 && (
-            <ul className="mt-6 flex gap-4 text-sm">
+            <ul className="mt-3 flex gap-4 text-sm">
               {social.map(([name, url]) => (
                 <li key={name}>
-                  <a href={url} target="_blank" rel="noopener noreferrer" className="capitalize hover:text-signal">
+                  <a href={url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center capitalize hover:text-signal">
                     {name}
                   </a>
                 </li>

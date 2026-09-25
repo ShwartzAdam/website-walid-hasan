@@ -34,7 +34,7 @@ export const projects: Project[] = [
     statistics: [],
     hero: {
       status: "missing",
-      illustration: "residential",
+      illustration: "network",
       alt: { he: "עבודות בברוכין", ar: "أعمال في بروخين", en: "Works in Bruchin" },
       brief: "Request originals of the Bruchin photos posted on the company Facebook page; drone of the neighborhood",
       source: {
