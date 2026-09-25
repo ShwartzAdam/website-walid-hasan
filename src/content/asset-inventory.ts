@@ -68,6 +68,20 @@ export const inventory: InventoryItem[] = [
     notes: "One public summary described the 200 classification as G4 — check G5 against the certificate.",
   },
   {
+    id: "R-registrar-listing",
+    category: "Credentials",
+    item: "Registrar of Contractors listing — contractor no. 28803",
+    status: "needs-confirmation",
+    source: "Registrar of Contractors data, supplied by the site owner via a business-data site",
+    dateFound: "2026-09-25",
+    whatItProves:
+      "Contractor no. 28803; fields: construction (2013), roads/infrastructure (2025), water/sewer/drainage (2019), pumping-station electromechanical (2020); phone, email and P.O. box address; directors and shareholders",
+    usagePermission: "not-required",
+    confidence: "high",
+    finalStatus: "Shown as NEEDS_CONFIRMATION (credentials, contact details)",
+    notes: "Listing does not show classification letters. Directors/shareholders listed: Hossam, Zeid and Asad Hasan.",
+  },
+  {
     id: "R-facebook-page",
     category: "Company",
     item: "Company Facebook page",
@@ -183,7 +197,7 @@ export const inventory: InventoryItem[] = [
     whatItProves: "Business location",
     usagePermission: "not-required",
     confidence: "medium",
-    finalStatus: "Not used — address/phone still placeholders",
+    finalStatus: "Not used — street address not yet confirmed",
     notes: "Add the listing URL and use it as contact.wazeUrl once the company confirms the address.",
   },
   {
@@ -275,7 +289,7 @@ export const inventory: InventoryItem[] = [
     id: "A-contact",
     category: "Contact",
     item: "Phone, mobile, WhatsApp, email, address, hours, contact person, lead email",
-    status: "missing",
-    finalStatus: "Placeholders marked NEEDS_CONFIRMATION",
+    status: "needs-confirmation",
+    finalStatus: "Phone, email and address from the Registrar listing; hours still a placeholder — all marked NEEDS_CONFIRMATION",
   },
 ];

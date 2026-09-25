@@ -9,8 +9,8 @@ Priority for every asset: **Original → Web → Generated → Placeholder**. GE
 | 🟢 VERIFIED | 0 |
 | 🔵 WEB | 10 |
 | 🟣 GENERATED | 24 |
-| 🟡 NEEDS_CONFIRMATION | 4 |
-| 🔴 MISSING | 7 |
+| 🟡 NEEDS_CONFIRMATION | 6 |
+| 🔴 MISSING | 6 |
 
 ## Research sources & required assets
 
@@ -18,6 +18,7 @@ Priority for every asset: **Original → Web → Generated → Placeholder**. GE
 |---|---|---|---|---|---|---|---|---|
 | R-mof-registry | Credentials | Recognised contractor listing — company 513785527 | 🔵 WEB | [Ministry of Finance — recognised contractors registry](https://asset.mof.gov.il/contractorRepository/s/) | Registered name "וליד חסן תשתיות עפר ופיתוח בע״מ", company no. 513785527, certificate 13.11.2024–13.11.2026, sub-branches 200 and 260 | not-required | high | Shown as NEEDS_CONFIRMATION (credentials, timeline) |
 | R-classifications | Credentials | Contractor no. 28803 · G1 · G5 · B4 · B1 | 🟡 NEEDS_CONFIRMATION | Earlier research (Asset Strategy §8) | Contractor number and classifications | not-required | medium | Shown as NEEDS_CONFIRMATION |
+| R-registrar-listing | Credentials | Registrar of Contractors listing — contractor no. 28803 | 🟡 NEEDS_CONFIRMATION | Registrar of Contractors data, supplied by the site owner via a business-data site | Contractor no. 28803; fields: construction (2013), roads/infrastructure (2025), water/sewer/drainage (2019), pumping-station electromechanical (2020); phone, email and P.O. box address; directors and shareholders | not-required | high | Shown as NEEDS_CONFIRMATION (credentials, contact details) |
 | R-facebook-page | Company | Company Facebook page | 🔵 WEB | [Facebook — page titled "וליד חסן תשתיות עפר ופיתוח בע״מ"](https://www.facebook.com/100063619101665/) | Official social presence; albums and videos of company works | requested | high | Linked in footer (social) |
 | R-facebook-album | Projects | Company Facebook photo album | 🔵 WEB | [link](https://www.facebook.com/100063619101665/albums/116975663112678/) | Photos of company works | requested | high | Not used — originals requested |
 | R-facebook-video | Video | Company Facebook video | 🔵 WEB | [link](https://www.facebook.com/100063619101665/videos/2738968216172908/) | Video footage of company works (candidate for hero / project video) | requested | high | Not used — original file requested |
@@ -26,7 +27,7 @@ Priority for every asset: **Original → Web → Generated → Placeholder**. GE
 | R-album-bruchin | Projects | Album "פרויקט - ברוכין שלב ג' - יזם אמנה" (7 photos) and post "עבודות בברוכין פרויקט אמנה" | 🔵 WEB | [Company Facebook page — albums](https://www.facebook.com/100063619101665/posts/100757044734540/) | Bruchin Phase C for Amana | requested | high | Project page shown as NEEDS_CONFIRMATION with GENERATED illustration — album originals requested |
 | R-volvo-ec300e | Equipment | Volvo EC300E excavator delivery post | 🔵 WEB | [Volvo dealer Gilboa — Facebook](https://www.facebook.com/gilboa.volvo/posts/1391925860922845/) | Company took delivery of a new Volvo EC300E | unknown | medium | Equipment item NEEDS_CONFIRMATION with GENERATED drawing |
 | R-metso-lt1213s | Equipment | Metso LT1213S crusher delivery post | 🔵 WEB | [M. Bar (Metso supplier) — Facebook](https://www.facebook.com/mbar.ltd/posts/636146386581775/) | Company received a Metso LT1213S mobile crusher | unknown | medium | Equipment item NEEDS_CONFIRMATION with GENERATED drawing |
-| R-waze | Contact | Waze business listing | 🟡 NEEDS_CONFIRMATION | Earlier research | Business location | not-required | medium | Not used — address/phone still placeholders |
+| R-waze | Contact | Waze business listing | 🟡 NEEDS_CONFIRMATION | Earlier research | Business location | not-required | medium | Not used — street address not yet confirmed |
 | R-duns | Contact | Dun's Guide listing | 🟡 NEEDS_CONFIRMATION | Earlier research | Company details (address, phone, activity) | not-required | medium | Not used |
 | R-dapei-zahav | Contact | Dapei Zahav listing "וליד חסן, טירה" | 🔵 WEB | [link](https://www.d.co.il/80063860/37290/) | Possibly the company's contact details in Tira — NOT confirmed to be the same business | not-required | low | Not used |
 | R-municipal | Projects | Municipal / regional-council documents and public tenders | 🟡 NEEDS_CONFIRMATION | Earlier research | Public projects and clients | not-required | medium | Not yet linked to project pages |
@@ -36,7 +37,7 @@ Priority for every asset: **Original → Web → Generated → Placeholder**. GE
 | A-yard | Company | Office, equipment yard, vehicles, active site | 🔴 MISSING |  |  |  |  | GENERATED illustrations in company sections |
 | A-clients | Clients | Client names & logos with permission | 🔴 MISSING |  |  |  |  | Section hidden |
 | A-testimonials | Testimonials | Client quotes with permission | 🔴 MISSING |  |  |  |  | Section hidden |
-| A-contact | Contact | Phone, mobile, WhatsApp, email, address, hours, contact person, lead email | 🔴 MISSING |  |  |  |  | Placeholders marked NEEDS_CONFIRMATION |
+| A-contact | Contact | Phone, mobile, WhatsApp, email, address, hours, contact person, lead email | 🟡 NEEDS_CONFIRMATION |  |  |  |  | Phone, email and address from the Registrar listing; hours still a placeholder — all marked NEEDS_CONFIRMATION |
 
 ## Media slots used by the site
 
