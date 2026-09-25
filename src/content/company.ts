@@ -241,9 +241,31 @@ export const leadership: Person[] = [
     verification: {
       status: "needs-confirmation",
       notes:
-        "Confirm title and approve photo. The company registry (updated 6.7.2026) lists Hossam Hasan, Zeid Hasan and Asad Hasan as directors and shareholders, and Walid Hasan in neither role — confirm who should appear under leadership.",
+        "Confirm title and approve photo. The company registry (updated 6.7.2026) does not list Walid Hasan as a director or shareholder — confirm the role and whether to show Walid Hasan under leadership.",
     },
   },
+  ...(
+    [
+      ["hossam-hasan", { he: "חוסאם חסן", ar: "حسام حسن", en: "Hossam Hasan" }, ""],
+      ["zeid-hasan", { he: "זייד חסן", ar: "زيد حسن", en: "Zeid Hasan" }, ""],
+      ["asad-hasan", { he: "אסד חסן", ar: "أسد حسن", en: "Asad Hasan" }, " Also listed as an officer of the company (role not stated)."],
+    ] as const
+  ).map(
+    ([id, name, extra]): Person => ({
+      id,
+      name,
+      // The registry gives only "director"; replace with the actual title once the company supplies it.
+      role: { he: "דירקטור", ar: "عضو مجلس الإدارة", en: "Director" },
+      image: { status: "missing", alt: name, brief: "Environmental portrait on site" },
+      verification: {
+        status: "needs-confirmation",
+        basis: "public-source",
+        source: "Company registry — directors and shareholders (updated 6.7.2026)",
+        checkedAt: "2026-09-25",
+        notes: `Listed as director and shareholder.${extra} Company to confirm the title to show, approve appearing on the site and supply a photo.`,
+      },
+    }),
+  ),
 ];
 
 export const values: { title: Localized; body: Localized }[] = [
