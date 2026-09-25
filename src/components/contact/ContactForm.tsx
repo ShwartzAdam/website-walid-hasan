@@ -32,6 +32,7 @@ export function ContactForm({ locale }: { locale: Locale }) {
   const formRef = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<Record<string, FieldError>>({});
+  const [fileNames, setFileNames] = useState<string[]>([]);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -180,15 +181,26 @@ export function ContactForm({ locale }: { locale: Locale }) {
       </div>
       <div className="md:col-span-2">
         {label("files")}
-        <input
-          {...fieldProps("files")}
-          type="file"
-          multiple
-          accept={ALLOWED_EXTENSIONS.map((e) => `.${e}`).join(",")}
-          aria-describedby={`f-files-hint${errors.files ? " f-files-error" : ""}`}
-          className="mt-3 block w-full cursor-pointer border border-dashed border-steel p-6 text-sm text-steel file:me-4 file:cursor-pointer file:border-0 file:bg-ink file:px-4 file:py-2 file:font-semibold file:text-paper hover:border-ink"
-        />
-        <p id="f-files-hint" className="mt-2 text-sm text-stone">
+        {/* The native control is stretched invisibly over a localized one: the browser's own
+            "Choose files / No file chosen" text follows the browser language, not the page's. */}
+        <div className="relative mt-3 flex flex-wrap items-center gap-4 border border-dashed border-steel p-6 hover:border-ink has-[input:focus-visible]:outline-2 has-[input:focus-visible]:outline-offset-3 has-[input:focus-visible]:outline-signal">
+          <input
+            {...fieldProps("files")}
+            type="file"
+            multiple
+            accept={ALLOWED_EXTENSIONS.map((e) => `.${e}`).join(",")}
+            aria-describedby={`f-files-hint${errors.files ? " f-files-error" : ""}`}
+            onChange={(e) => setFileNames(Array.from(e.currentTarget.files ?? [], (f) => f.name))}
+            className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
+          />
+          <span aria-hidden className="bg-ink px-4 py-2 text-sm font-semibold text-paper">
+            {t.chooseFiles}
+          </span>
+          <span aria-live="polite" className="min-w-0 text-sm break-all text-steel">
+            {fileNames.length > 0 ? fileNames.join(", ") : t.noFiles}
+          </span>
+        </div>
+        <p id="f-files-hint" className="mt-2 text-sm text-steel">
           {t.fields.filesHint}
         </p>
         {err("files")}
@@ -198,7 +210,7 @@ export function ContactForm({ locale }: { locale: Locale }) {
         <button type="submit" disabled={status === "sending"} className="btn btn-dark min-h-14 px-8 text-base disabled:opacity-60">
           {status === "sending" ? t.sending : t.submit}
         </button>
-        <p className="text-sm text-stone">{t.privacy}</p>
+        <p className="text-sm text-steel">{t.privacy}</p>
         {status === "error" && (
           <p role="alert" className="text-red-700">
             {t.error}

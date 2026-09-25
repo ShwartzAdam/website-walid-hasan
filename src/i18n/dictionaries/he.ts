@@ -74,6 +74,7 @@ const he: Dictionary = {
     backToProjects: "חזרה לפרויקטים",
   },
   home: {
+    heroLead: "קבלן תשתיות, פיתוח ועבודות עפר — עם צוותים וציוד מכני כבד של החברה, מהחפירה הראשונה ועד המסירה.",
     introEyebrow: "החברה",
     introHeadline: "בונים את התשתית שמאחורי קהילות צומחות.",
     introBody:
@@ -178,6 +179,8 @@ const he: Dictionary = {
       phone: "נא להזין מספר טלפון תקין.",
       files: "הקבצים גדולים מדי או בפורמט שאינו נתמך.",
     },
+    chooseFiles: "בחירת קבצים",
+    noFiles: "לא נבחרו קבצים",
     privacy: "הפרטים משמשים אך ורק למענה לפנייתכם.",
     directTitle: "קשר ישיר",
     officeTitle: "משרד",

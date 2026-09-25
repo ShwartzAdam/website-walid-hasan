@@ -11,10 +11,13 @@ import { ProjectCard } from "./ProjectCard";
 
 type Filters = { region: RegionId | ""; category: CategoryId | ""; year: string };
 const EMPTY: Filters = { region: "", category: "", year: "" };
+/** Below this many projects the filters are clutter, so the grid is shown on its own. */
+const MIN_PROJECTS_FOR_FILTERS = 6;
 
 /**
  * Filterable project grid (PRD §7): location, category, year.
  * Filters are mirrored into the query string so a filtered view can be shared.
+ * They appear once there are enough projects to need them.
  */
 export function ProjectsExplorer({
   locale,
@@ -27,9 +30,11 @@ export function ProjectsExplorer({
 }) {
   const dict = getDictionary(locale);
   const [filters, setFilters] = useState<Filters>(EMPTY);
+  const showFilters = projects.length >= MIN_PROJECTS_FOR_FILTERS;
 
   // Hydrate from the URL once on mount (the page itself is statically generated).
   useEffect(() => {
+    if (!showFilters) return;
     const q = new URLSearchParams(window.location.search);
     const region = q.get("location") ?? "";
     const category = q.get("category") ?? "";
@@ -40,7 +45,7 @@ export function ProjectsExplorer({
     };
     // eslint-disable-next-line react-hooks/set-state-in-effect
     if (next.region || next.category || next.year) setFilters(next);
-  }, []);
+  }, [showFilters]);
 
   const update = (patch: Partial<Filters>) => {
     const next = { ...filters, ...patch };
@@ -74,41 +79,43 @@ export function ProjectsExplorer({
 
   return (
     <div>
-      <div className="sticky top-16 z-30 -mx-4 mb-12 border-y border-sand bg-paper/95 px-4 py-4 backdrop-blur sm:-mx-8 sm:px-8 md:top-20 xl:-mx-14 xl:px-14">
-        <div className="flex flex-wrap items-end gap-3 md:gap-6">
-          <FilterSelect
-            label={dict.projects.filterCategory}
-            value={filters.category}
-            allLabel={dict.projects.filterAll}
-            onChange={(v) => update({ category: v as CategoryId | "" })}
-            options={options.categoryIds.map((id) => ({ value: id, label: categories[id][locale] }))}
-          />
-          <FilterSelect
-            label={dict.projects.filterLocation}
-            value={filters.region}
-            allLabel={dict.projects.filterAll}
-            onChange={(v) => update({ region: v as RegionId | "" })}
-            options={options.regionIds.map((id) => ({ value: id, label: regions[id][locale] }))}
-          />
-          <FilterSelect
-            label={dict.projects.filterYear}
-            value={filters.year}
-            allLabel={dict.projects.filterAll}
-            onChange={(v) => update({ year: v })}
-            options={options.years.map((y) => ({ value: String(y), label: String(y) }))}
-          />
-          <div className="ms-auto flex items-center gap-4 text-sm">
-            <p aria-live="polite" className="text-steel">
-              {dict.projects.resultsCount(results.length)}
-            </p>
-            {active && (
-              <button type="button" onClick={() => update(EMPTY)} className="font-semibold underline underline-offset-4 hover:text-signal-deep">
-                {dict.projects.clearFilters}
-              </button>
-            )}
+      {showFilters && (
+        <div className="sticky top-16 z-30 -mx-4 mb-12 border-y border-sand bg-paper/95 px-4 py-4 backdrop-blur sm:-mx-8 sm:px-8 md:top-20 xl:-mx-14 xl:px-14">
+          <div className="flex flex-wrap items-end gap-3 md:gap-6">
+            <FilterSelect
+              label={dict.projects.filterCategory}
+              value={filters.category}
+              allLabel={dict.projects.filterAll}
+              onChange={(v) => update({ category: v as CategoryId | "" })}
+              options={options.categoryIds.map((id) => ({ value: id, label: categories[id][locale] }))}
+            />
+            <FilterSelect
+              label={dict.projects.filterLocation}
+              value={filters.region}
+              allLabel={dict.projects.filterAll}
+              onChange={(v) => update({ region: v as RegionId | "" })}
+              options={options.regionIds.map((id) => ({ value: id, label: regions[id][locale] }))}
+            />
+            <FilterSelect
+              label={dict.projects.filterYear}
+              value={filters.year}
+              allLabel={dict.projects.filterAll}
+              onChange={(v) => update({ year: v })}
+              options={options.years.map((y) => ({ value: String(y), label: String(y) }))}
+            />
+            <div className="ms-auto flex items-center gap-4 text-sm">
+              <p aria-live="polite" className="text-steel">
+                {dict.projects.resultsCount(results.length)}
+              </p>
+              {active && (
+                <button type="button" onClick={() => update(EMPTY)} className="font-semibold underline underline-offset-4 hover:text-signal-deep">
+                  {dict.projects.clearFilters}
+                </button>
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {results.length === 0 ? (
         <p className="py-24 text-center text-lg text-steel">{dict.projects.noResults}</p>

@@ -59,11 +59,19 @@ export function Hero({ locale, image, video }: HeroProps) {
             </motion.span>
           </span>
         </h1>
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease, delay: 0.45 }}
+          className="mt-6 max-w-2xl text-lg leading-relaxed text-sand md:text-2xl"
+        >
+          {dict.home.heroLead}
+        </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease, delay: 0.55 }}
-          className="mt-10 flex flex-wrap gap-3"
+          className="mt-8 flex flex-wrap gap-3 md:mt-10"
         >
           <Link
             href={href(locale, "/projects")}

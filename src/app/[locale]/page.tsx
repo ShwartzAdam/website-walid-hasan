@@ -111,14 +111,14 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       {featured.length > 0 && (
         <section className="bg-paper py-24 md:py-36">
           <div className="container-x">
-            <div className="mb-16 flex flex-wrap items-end justify-between gap-6 md:mb-24">
+            <div className="mb-14 flex flex-wrap items-end justify-between gap-6 md:mb-20">
               <SectionHeading eyebrow={dict.home.projectsEyebrow} title={dict.home.projectsHeadline} />
               <Link href={href(locale, "/projects")} className="btn btn-ghost-dark">
                 {dict.common.allProjects}
                 <ArrowIcon />
               </Link>
             </div>
-            <div className="space-y-24 md:space-y-40">
+            <div className="space-y-20 md:space-y-28">
               {featured.map((project, i) => (
                 <ProjectFeature key={project.slug} project={project} locale={locale} index={i} />
               ))}
@@ -134,7 +134,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
             <Reveal>
               <p className="eyebrow mb-14 text-steel">{dict.home.numbersEyebrow}</p>
             </Reveal>
-            <dl className="grid grid-cols-1 gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
+            <dl className="grid grid-cols-1 gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
               {stats.map((s, i) => (
                 <Reveal key={s.id} delay={i * 0.08} className="flex flex-col items-start border-t border-ink pt-6">
                   <dt className="order-2 mt-3 text-steel">{s.label[locale]}</dt>
