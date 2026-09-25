@@ -7,8 +7,8 @@ Priority for every asset: **Original → Web → Generated → Placeholder**. GE
 | Status | Count |
 |---|---|
 | 🟢 VERIFIED | 0 |
-| 🔵 WEB | 8 |
-| 🟣 GENERATED | 23 |
+| 🔵 WEB | 10 |
+| 🟣 GENERATED | 24 |
 | 🟡 NEEDS_CONFIRMATION | 4 |
 | 🔴 MISSING | 7 |
 
@@ -21,7 +21,9 @@ Priority for every asset: **Original → Web → Generated → Placeholder**. GE
 | R-facebook-page | Company | Company Facebook page | 🔵 WEB | [Facebook — page titled "וליד חסן תשתיות עפר ופיתוח בע״מ"](https://www.facebook.com/100063619101665/) | Official social presence; albums and videos of company works | requested | high | Linked in footer (social) |
 | R-facebook-album | Projects | Company Facebook photo album | 🔵 WEB | [link](https://www.facebook.com/100063619101665/albums/116975663112678/) | Photos of company works | requested | high | Not used — originals requested |
 | R-facebook-video | Video | Company Facebook video | 🔵 WEB | [link](https://www.facebook.com/100063619101665/videos/2738968216172908/) | Video footage of company works (candidate for hero / project video) | requested | high | Not used — original file requested |
-| R-bruchin-amana | Projects | Post "עבודות בברוכין פרויקט אמנה" | 🔵 WEB | [Company Facebook page](https://www.facebook.com/100063619101665/posts/100757044734540/) | Company carried out works in Bruchin for an Amana project | requested | medium | Project page shown as NEEDS_CONFIRMATION with GENERATED illustration |
+| R-album-salit | Projects | Album "פרויקט- סלעית שלב ג' - יזם אמפא ישראל" (9 photos, Jan 2020) | 🔵 WEB | [Company Facebook page — albums](https://www.facebook.com/100063619101665/) | Sal'it Phase C for Amfa Israel; drone photos before and after the works | requested | high | Project page shown as NEEDS_CONFIRMATION with GENERATED illustration — album originals requested |
+| R-album-nofei-nehemia | Projects | Album "פרויקט - נופי נחמיה 14 יח"ד יזם - אמנה" (12 photos, Dec 2019 – Jan 2020) | 🔵 WEB | [Company Facebook page — albums](https://www.facebook.com/100063619101665/) | 14-unit compound in Nofei Nehemia for Amana; works in progress and drone of the finished compound | requested | high | Project page shown as NEEDS_CONFIRMATION with GENERATED illustration — album originals requested |
+| R-album-bruchin | Projects | Album "פרויקט - ברוכין שלב ג' - יזם אמנה" (7 photos) and post "עבודות בברוכין פרויקט אמנה" | 🔵 WEB | [Company Facebook page — albums](https://www.facebook.com/100063619101665/posts/100757044734540/) | Bruchin Phase C for Amana | requested | high | Project page shown as NEEDS_CONFIRMATION with GENERATED illustration — album originals requested |
 | R-volvo-ec300e | Equipment | Volvo EC300E excavator delivery post | 🔵 WEB | [Volvo dealer Gilboa — Facebook](https://www.facebook.com/gilboa.volvo/posts/1391925860922845/) | Company took delivery of a new Volvo EC300E | unknown | medium | Equipment item NEEDS_CONFIRMATION with GENERATED drawing |
 | R-metso-lt1213s | Equipment | Metso LT1213S crusher delivery post | 🔵 WEB | [M. Bar (Metso supplier) — Facebook](https://www.facebook.com/mbar.ltd/posts/636146386581775/) | Company received a Metso LT1213S mobile crusher | unknown | medium | Equipment item NEEDS_CONFIRMATION with GENERATED drawing |
 | R-waze | Contact | Waze business listing | 🟡 NEEDS_CONFIRMATION | Earlier research | Business location | not-required | medium | Not used — address/phone still placeholders |
@@ -42,8 +44,9 @@ Priority for every asset: **Original → Web → Generated → Placeholder**. GE
 |---|---|---|---|---|---|---|---|---|
 | M-home.hero | Hero | Drone video/photo of an active earthworks site at scale — machinery, terraces, haul roads. Also a vertical mobile crop and a video poster. | 🟣 GENERATED |  |  | n/a |  | GENERATED: topography |
 | M-company.story | Company | Walid Hasan and management on an active site, machinery behind | 🟣 GENERATED |  |  | n/a |  | GENERATED: residential |
-| M-project:bruchin-amana.hero | Projects | Request originals of the Bruchin photos posted on the company Facebook page; drone of the neighborhood | 🟣 GENERATED | [link](https://www.facebook.com/100063619101665/posts/100757044734540/) | Company posted photos of its works in Bruchin (Amana project) | requested | medium | GENERATED: residential |
-| M-project:enav.hero | Projects | Drone: finished neighborhood roads and plots, late afternoon light | 🟣 GENERATED |  |  | n/a |  | GENERATED: neighborhood |
+| M-project:salit-c.hero | Projects | Top-down drone of the finished neighborhood (curved streets, playground) — photo received, file to be added; originals of the 9-photo album (before/after) requested | 🟣 GENERATED | [link](https://www.facebook.com/100063619101665/) | Company album "פרויקט- סלעית שלב ג' - יזם אמפא ישראל" (9 photos, Jan 2020): drone photos before and after the works | requested | high | GENERATED: neighborhood |
+| M-project:nofei-nehemia.hero | Projects | Drone of the finished compound — 7 buildings behind the stone-clad retaining wall — photo received, file to be added; originals of the 12-photo album requested | 🟣 GENERATED | [link](https://www.facebook.com/100063619101665/) | Company album "פרויקט - נופי נחמיה 14 יח"ד יזם - אמנה" (12 photos, Dec 2019 – Jan 2020): works in progress and finished compound | requested | high | GENERATED: retaining |
+| M-project:bruchin-amana.hero | Projects | New roundabout with olive tree, fresh asphalt and sidewalks — photo received, file to be added; originals of the 7-photo album requested | 🟣 GENERATED | [link](https://www.facebook.com/100063619101665/posts/100757044734540/) | Company album "פרויקט - ברוכין שלב ג' - יזם אמנה" (7 photos) and post "עבודות בברוכין פרויקט אמנה" | requested | high | GENERATED: road |
 | M-capability:earthworks | Capabilities | Drone, top-down: excavator cutting a terraced site, trucks queued | 🟣 GENERATED |  |  | n/a |  | GENERATED: earthworks |
 | M-capability:infrastructure | Capabilities | Low angle: open trench with pipes, crew, excavator arm in frame | 🟣 GENERATED |  |  | n/a |  | GENERATED: network |
 | M-capability:roads | Capabilities | Drone, long diagonal: fresh road cutting through terrain at golden hour | 🟣 GENERATED |  |  | n/a |  | GENERATED: road |
