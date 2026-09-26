@@ -35,7 +35,8 @@ jobs:
           NEXT_PUBLIC_SITE_URL: ${{ steps.pages.outputs.base_url }}
           # Optional repository variables (Settings → Secrets and variables → Actions → Variables).
           CONTENT_MODE: ${{ vars.CONTENT_MODE || 'preview' }}
-          NEXT_PUBLIC_GA_ID: ${{ vars.NEXT_PUBLIC_GA_ID }}
+          # GA4 measurement ID (public — it appears in every page). A repository variable overrides it.
+          NEXT_PUBLIC_GA_ID: ${{ vars.NEXT_PUBLIC_GA_ID || 'G-J1WMN9Q01T' }}
           NEXT_PUBLIC_CONTACT_ENDPOINT: ${{ vars.NEXT_PUBLIC_CONTACT_ENDPOINT }}
       - uses: actions/upload-pages-artifact@v3
         with:
