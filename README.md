@@ -79,7 +79,7 @@ For the production launch, a Node host such as Vercel is still recommended. It a
 
 ## Analytics (GA4)
 
-Measurement ID: **`G-J1WMN9Q01T`**. The GitHub Pages workflow builds with it, and a repository variable `NEXT_PUBLIC_GA_ID` overrides it. For local or other hosting, set `NEXT_PUBLIC_GA_ID` in the environment. With no ID set, no analytics code or cookies are loaded.
+Measurement ID: **`G-J1WMN9Q01T`**. It is the default for every production build (Vercel, GitHub Pages), so no hosting setup is needed. Set `NEXT_PUBLIC_GA_ID` to use a different ID, or to `off` to disable tracking. Development builds (`npm run dev`) are never tracked. The standard Google tag is rendered into each page's HTML, so Google's tag check detects it.
 
 ### What is tracked
 

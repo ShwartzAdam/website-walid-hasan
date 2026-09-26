@@ -6,7 +6,17 @@
  * load. Sessions (session_start, engaged sessions, engagement time) are derived
  * by GA4 from the same tag — no extra code needed.
  */
-export const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+/**
+ * The site's GA4 measurement ID (public — it is served in every page). Used by
+ * production builds on any host (Vercel, GitHub Pages) unless NEXT_PUBLIC_GA_ID
+ * overrides it; NEXT_PUBLIC_GA_ID=off disables tracking. Dev builds stay untracked.
+ */
+const DEFAULT_GA_ID = "G-J1WMN9Q01T";
+const configured = process.env.NEXT_PUBLIC_GA_ID;
+export const GA_ID =
+  configured === "off"
+    ? undefined
+    : configured || (process.env.NODE_ENV === "production" ? DEFAULT_GA_ID : undefined);
 
 export type AnalyticsEvent =
   | "contact_form_submit"
@@ -28,6 +38,8 @@ export type AnalyticsEvent =
 declare global {
   interface Window {
     dataLayer?: unknown[];
+    /** Set by the inline tag in the page HTML once GA4 is configured. */
+    __ga4Configured?: boolean;
     gtag?: (...args: unknown[]) => void;
   }
 }
@@ -42,6 +54,8 @@ let initialised = false;
 export function initAnalytics() {
   if (!GA_ID || typeof window === "undefined" || initialised) return;
   initialised = true;
+  // Normally the inline tag in the HTML (components/layout/Analytics.tsx) has already done this.
+  if (window.__ga4Configured) return;
   window.dataLayer = window.dataLayer || [];
   if (typeof window.gtag !== "function") {
     // gtag.js requires the real `arguments` object, not an array.

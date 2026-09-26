@@ -1,7 +1,6 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import Script from "next/script";
 import { useEffect } from "react";
 import { GA_ID, initAnalytics, track, trackPageView } from "@/lib/analytics";
 
@@ -129,5 +128,17 @@ export function Analytics({ locale }: { locale: string }) {
   }, [locale]);
 
   if (!GA_ID) return null;
-  return <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />;
+  // The standard Google tag, server-rendered into the HTML so Google's tag check
+  // (and any crawler) finds it. Automatic page views are off — they are sent above.
+  return (
+    <>
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
+      <script
+        id="ga4-config"
+        dangerouslySetInnerHTML={{
+          __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config','${GA_ID}',{send_page_view:false});window.__ga4Configured=true;`,
+        }}
+      />
+    </>
+  );
 }
