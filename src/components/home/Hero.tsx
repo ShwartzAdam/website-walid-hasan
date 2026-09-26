@@ -95,6 +95,12 @@ export function Hero({ locale, image, video }: HeroProps) {
 
       <a
         href="#intro"
+        onClick={(e) => {
+          const target = document.getElementById("intro");
+          if (!target) return;
+          e.preventDefault();
+          target.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+        }}
         className="absolute end-4 bottom-24 hidden flex-col items-center gap-3 text-xs text-sand sm:end-8 md:bottom-10 md:flex"
       >
         <span className="[writing-mode:vertical-rl]">{dict.a11y.scrollDown}</span>

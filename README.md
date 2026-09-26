@@ -79,13 +79,30 @@ For the production launch, a Node host such as Vercel is still recommended. It a
 
 ## Analytics (GA4)
 
-The site sends a GA4 `page_view` on every page change, including in-site navigation, which gtag's automatic page view misses. Each one carries the page title, full URL and `site_language` (he/ar/en). GA4 builds sessions from these (sessions, engaged sessions, engagement time) with no extra setup. The events from PRD §21 (contact form, WhatsApp, phone, email, CTAs, project views, filters, language switch) are sent as well.
+Measurement ID: **`G-J1WMN9Q01T`**. The GitHub Pages workflow builds with it, and a repository variable `NEXT_PUBLIC_GA_ID` overrides it. For local or other hosting, set `NEXT_PUBLIC_GA_ID` in the environment. With no ID set, no analytics code or cookies are loaded.
 
-The site's GA4 measurement ID is **`G-J1WMN9Q01T`**. The GitHub Pages workflow builds with it, and a repository variable `NEXT_PUBLIC_GA_ID` overrides it. For local or other hosting, set `NEXT_PUBLIC_GA_ID` in the environment.
+### What is tracked
 
-One setting is needed in Google Analytics: in the web stream's **Enhanced measurement → Page views → Advanced**, switch off **"Page changes based on browser history events"**. The site sends these itself; leaving it on double-counts. Optionally, register `site_language` as an event-scoped custom dimension so you can split reports by language.
+| Event | When | Parameters |
+| --- | --- | --- |
+| `page_view` | every page, including in-site navigation | `page_title`, `page_location`, `page_path`, `site_language` |
+| `button_click` | every link or button click | `button_text` (visible text), `button_id`, `link_url`, `section_name`, `page` |
+| `scroll_depth` | 25 / 50 / 75 / 90 / 100 % of each page | `percent_scrolled`, `page_path` |
+| `section_view` | a page section actually seen (half of it on screen) | `section_name`, `section_index`, `page_path` |
+| `whatsapp_click`, `phone_click`, `email_click` | contact links | `page` |
+| `contact_form_submit` / `contact_form_error`, `cta_click`, `project_view`, `project_filter`, `language_select` | PRD §21 conversions | event specific |
 
-With no ID set, no analytics code or cookies are loaded.
+GA4 adds sessions, users, new vs returning, country and city, device, browser and traffic source on its own. It does **not** identify individual people, and the site deliberately collects no personal data.
+
+### One-time setup in Google Analytics
+
+1. **Admin → Data streams → (web stream) → Enhanced measurement**:
+   - Under *Page views → Advanced*, switch off **"Page changes based on browser history events"**. The site sends page views itself; leaving it on double-counts.
+   - Switch off **Scrolls**. The site's `scroll_depth` event is more detailed than GA4's single 90% scroll event.
+2. **Admin → Custom definitions → Create custom dimension** (event scope) for `button_text`, `section_name`, `site_language` and `link_url`, plus a custom metric for `percent_scrolled`. Without these, the parameters are collected but can't be used in reports.
+3. To see individual visits, use **Reports → Realtime** (live) or **Explore → User explorer**: pick a visitor to see their page views, clicks and scroll depth in order. Use **Explore → Free form** with the `button_click` event and the `button_text` dimension to rank the buttons.
+
+Before launch, check whether the site needs a cookie-consent banner under the Israeli Privacy Protection Law (Amendment 13).
 
 ## Environment
 

@@ -37,11 +37,9 @@
     scroll-padding-top: 5rem;
   }
 
-  @media (prefers-reduced-motion: no-preference) {
-    html {
-      scroll-behavior: smooth;
-    }
-  }
+  /* No global \`scroll-behavior: smooth\`: it animates Next.js's scroll-to-top on
+     navigation and pages ended up landing part-way down. In-page anchors that
+     should glide (the hero's scroll cue) do it in JS instead. */
 
   body {
     background: var(--color-paper);

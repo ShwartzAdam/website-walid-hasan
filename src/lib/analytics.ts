@@ -17,7 +17,13 @@ export type AnalyticsEvent =
   | "project_view"
   | "project_filter"
   | "language_select"
-  | "cta_click";
+  | "cta_click"
+  // Every click on a link or button (label, target, page section).
+  | "button_click"
+  // Scroll milestones per page: 25 / 50 / 75 / 90 / 100 %.
+  | "scroll_depth"
+  // A page section seen by the visitor (at least half of it on screen).
+  | "section_view";
 
 declare global {
   interface Window {
