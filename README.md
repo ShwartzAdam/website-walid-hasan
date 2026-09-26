@@ -81,12 +81,9 @@ For the production launch, a Node host such as Vercel is still recommended. It a
 
 The site sends a GA4 `page_view` on every page change, including in-site navigation, which gtag's automatic page view misses. Each one carries the page title, full URL and `site_language` (he/ar/en). GA4 builds sessions from these (sessions, engaged sessions, engagement time) with no extra setup. The events from PRD §21 (contact form, WhatsApp, phone, email, CTAs, project views, filters, language switch) are sent as well.
 
-To turn it on:
+The site's GA4 measurement ID is **`G-J1WMN9Q01T`**. The GitHub Pages workflow builds with it, and a repository variable `NEXT_PUBLIC_GA_ID` overrides it. For local or other hosting, set `NEXT_PUBLIC_GA_ID` in the environment.
 
-1. In [Google Analytics](https://analytics.google.com), create a GA4 property and a **Web** data stream for `https://shwartzadam.github.io/website-walid-hasan/` (later, the real domain). Copy its measurement ID (`G-XXXXXXXXXX`).
-2. In the stream's **Enhanced measurement** settings, open *Page views → Advanced* and switch off **"Page changes based on browser history events"**. The site sends these itself; leaving it on double-counts.
-3. On GitHub, go to **Settings → Secrets and variables → Actions → Variables** and add `NEXT_PUBLIC_GA_ID` with the measurement ID. The next deployment picks it up (or run *Deploy to GitHub Pages* manually).
-4. Optional: register `site_language` as an event-scoped custom dimension so you can split reports by language.
+One setting is needed in Google Analytics: in the web stream's **Enhanced measurement → Page views → Advanced**, switch off **"Page changes based on browser history events"**. The site sends these itself; leaving it on double-counts. Optionally, register `site_language` as an event-scoped custom dimension so you can split reports by language.
 
 With no ID set, no analytics code or cookies are loaded.
 
